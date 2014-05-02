@@ -1,0 +1,11 @@
+#proyecto_hotel_homepage:
+#    pattern:  /hello/{name}
+#    defaults: { _controller: proyectoHotelBundle:Default:index }
+
+pagina_principal:
+    pattern: /
+    defaults: { _controller: proyectoHotelBundle:Default:index }
+
+pagina_reservas:
+    pattern: /reservar
+    defaults: { _controller: proyectoHotelBundle:Reservas:primera }

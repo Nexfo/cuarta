@@ -1,0 +1,52 @@
+{% extends 'proyectoHotelBundle::layout.html.twig' %}
+{% block stylesheets %}
+	<link rel="stylesheet" href="//code.jquery.com/ui/1.10.4/themes/smoothness/jquery-ui.css">
+	{{ parent() }}
+{% endblock %}
+
+{% form_theme form 'proyectoHotelBundle:Form:form_reserva_type.html.twig' %}
+{% block form_reserva_simple %}
+	{{ form_start(form, {'attr': {'novalidate': 'novalidate'}}) }}
+		<div>
+			<span>{{ form_label(form.tipo) }}</span><br/>
+			{{ form_widget(form.tipo) }}
+		</div>
+		
+		<div>
+			<span>{{ form_label(form.fecha_entrada) }}</span><br/>
+			{{ form_widget(form.fecha_entrada) }}
+		</div>
+		
+		<div>
+			<span>{{ form_label(form.fecha_salida) }}</span><br/>
+			{{ form_widget(form.fecha_salida) }}
+		</div>
+		
+		<div>
+			<span>{{ form_label(form.adultos) }}</span><br/>
+			{{ form_widget(form.adultos) }}
+		</div>
+		
+		<div>
+			<span>{{ form_label(form.ninios) }}</span><br/>
+			{{ form_widget(form.ninios) }}
+		</div>
+		
+		<div>
+			<span>&nbsp</span><br/>
+			{{ form_widget(form.reservar) }}
+		</div>
+	{{ form_end(form) }}
+{% endblock %}
+
+{% block javascripts %}
+	{{ parent() }}
+	<script src="//code.jquery.com/ui/1.10.4/jquery-ui.js"></script>
+	<script src="//jquery-ui.googlecode.com/svn/tags/1.8.20/ui/i18n/jquery.ui.datepicker-es.js"></script>
+	<script>
+		global = {
+			locale: '{{ app.request.locale }}'
+		}
+	</script>
+	<script src="{{ asset('bundles/proyectohotel/js/file.js') }}"></script>
+{% endblock %}

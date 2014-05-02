@@ -3,11 +3,86 @@
     <head>
         <meta charset="UTF-8" />
         <title>{% block title %}Welcome!{% endblock %}</title>
-        {% block stylesheets %}{% endblock %}
-        <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
+		<link href='//fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css'>
+        {% block stylesheets %}
+			<link rel="stylesheet" href="{{ asset('bundles/proyectohotel/css/reset.css') }}" />
+			<link rel="stylesheet" href="{{ asset('bundles/proyectohotel/css/estilos.css') }}" />
+		{% endblock %}
+        <link rel="icon" type="image/x-icon" href="{# asset('favicon.ico') #}" />
     </head>
     <body>
-        {% block body %}{% endblock %}
-        {% block javascripts %}{% endblock %}
+		<div id="menu">
+			<div id="menuContent">
+				<div id="logotipo"><h1>Symfony II Hotel</h1></div>
+				<div id="opciones">
+					<ul>
+						<li>Hotel</li>
+						<li>Habitaciones & Suites</li>
+						<li>Reservas</li>
+						<li>Actividades</li>
+						<li>Contacto</li>
+					</ul>
+				</div>
+				<div id="idiomas"><select name="idioma"><option>ES</option><option>EN</option></select></div>
+				<div class="clear"></div>
+			</div>
+		</div>
+		<div id="fondo">
+		</div>
+		<div id="main">
+			{% block cabecera %}
+				<div id="cabecera">
+					<div id="slogans">
+						<div id="c_s_1">
+							<div id="s_1">Es más que un hotel, es lo que tú necesitas</div>
+							<div id="bg_s_1"> </div>
+						</div>
+						<br/>
+						<div id="c_s_2">
+							<div id="s_2">Increíble lugar por descubrir</div>
+							<div id="bg_s_2"> </div>
+						</div>
+					</div>
+				</div>
+			{% endblock %}
+			
+			{% block banner_reserva %}
+			{% endblock %}
+			
+			<div id="informacion">
+				{% block contenido %}
+				{% endblock %}
+			</div>
+		</div>
+		<div id="pie">
+			<div id="pieContent">
+				<div>&#169; 2014 Symfony II Hotel.</div>
+				<div id="social"><img src="{{ asset('bundles/proyectohotel/imgs/social.png') }}" /></div>
+				<div>
+					<ul>
+						<li>Contacto</li>
+						<li>Reservas</li>
+						<li>Habitaciones & Suites</li>
+						<li>Hotel</li>
+					</ul>
+				</div>
+			</div>
+		</div>
+        {% block javascripts %}
+			<script src="{{ asset('bundles/proyectohotel/js/jquery-1.11.0.min.js') }}"></script>
+			<script>
+				$(window).load(function(){
+					$(window).scroll(function () {
+						if ($(this).scrollTop() > 325) {
+							$('#reserva').css({"position": "fixed", "width": "980px", "top": "100px"});
+							$('#cabecera').css("margin-bottom", "145px");
+						} else {
+							$('#reserva').css({"position": "relative", "width": "100%", "top": ""});
+							$('#cabecera').css("margin-bottom", "0px");
+						}
+					});
+				});
+			</script>
+		{% endblock %}
     </body>
 </html>

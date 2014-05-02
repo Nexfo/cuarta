@@ -1,0 +1,34 @@
+{% extends '::base.html.twig' %}
+
+{% block banner_reserva %}
+	<div id="reserva">
+		<div id="info">
+			<h3>Reserva tu habitación online</h3>
+			<p>Lorem ispum solor sid ahmed loresin vane.</p>
+		</div>
+		<div id="formReserva">
+			{% block form_reserva_simple %}
+			{% endblock %}
+		</div>
+	</div>
+{% endblock %}
+
+{% block contenido %}
+	<ul>
+		<li>
+			<img src="{{ asset('bundles/proyectohotel/imgs/1.jpg') }}" />
+			<h4>Habitación individual <span>110 €</span></h4>
+			<p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat.</p>
+		</li>
+		<li>
+			<img src="{{ asset('bundles/proyectohotel/imgs/2.jpg') }}" />
+			<h4>Habitación doble <span>180 €</span></h4>
+			<p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat.</p>
+		</li>
+		<li>
+			<img src="{{ asset('bundles/proyectohotel/imgs/3.jpg') }}" />
+			<h4>Habitación suite <span>210 €</span></h4>
+			<p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat.</p>
+		</li>
+	</ul>
+{% endblock %}

@@ -1,0 +1,12 @@
+parameters:
+#    proyecto_hotel.example.class: proyecto\HotelBundle\Example
+
+services:
+#    proyecto_hotel.example:
+#        class: %proyecto_hotel.example.class%
+#        arguments: [@service_id, "plain_value", %parameter%]
+
+    form.type.datePicker:
+        class: proyecto\HotelBundle\Form\Type\DatePickerType
+        tags:
+            - { name: form.type, alias: datePicker }

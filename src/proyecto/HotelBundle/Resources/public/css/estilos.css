@@ -1,0 +1,68 @@
+body {
+  font-family: 'Open Sans', sans-serif;
+  background: #ebebeb;
+}
+
+#menu {position: fixed;height: 90px; width: 100%; background: rgba(0,0,0,0.85);border-bottom: 2px solid rgba(100,100,100,0.40);}
+#menuContent {width:980px; margin: 0 auto;/* border: 1px solid white*/;color: white;padding-top: 22.5px;}
+
+#logotipo, #opciones/*, #idiomas*/{float:left; display: inline; }
+
+#logotipo {/*position: absolute;*/width:300px;height: 40px;position:relative;}
+#logotipo h1 {position:absolute;padding: 5px 0px;text-transform:uppercase;font-size: 25px;font-weight: normal;border-bottom: 1px solid rgba(100,100,100,0.40); border-top: 1px solid rgba(100,100,100,0.40);}
+
+#opciones {width: 600px;height: 40px;position:relative;}
+#opciones ul {position: absolute; top: 25%;list-style: none;overflow: hidden}
+#opciones ul li {display: inline;padding: 0 6px 0px 10px; border-left: 1px solid rgba(100,100,100,0.40);}
+#opciones ul li:first-child {border: 0px;}
+
+#idiomas{width: 80px;height:40px;float:right;position:relative;}
+#idiomas select{margin: 0px 40px;position: absolute; top: 25%;color:white;border:0px;background: transparent;overflow: hidden;}
+
+#fondo {position: absolute;height:478px; width: 100%; background: silver url('../imgs/bg_beach.jpg') no-repeat center 10%;z-index:-100;}
+
+#cabecera {height: 425px; width: 100%;position: relative;}
+#cabecera #slogans {position: absolute;top: 52%;color: white;z-index:-100;overflow:hidden;}
+
+#s_1, #s_2, #bg_s_1, #bg_s_2 {display:inline-block;float:left;padding: 7px 14px;}
+#s_1, #s_2 {text-transform:uppercase;}
+#bg_s_1, #bg_s_2 {opacity: 0.8;width: 10px;}
+
+#s_1 {background: rgba(0,0,0,0.8);font-size: 19px;font-weight:bold;}
+#bg_s_1 {background: transparent url("../imgs/bg_black.png") no-repeat;height: 19px;}
+
+#c_s_2 {display:inline-block;}
+#s_2 {padding: 4px 8px 4px 14px;background: rgba(50,162,227,0.8);font-size: 15px;}
+#bg_s_2 {background: transparent url("../imgs/bg_blue.png") no-repeat;height: 9px;}
+
+#reserva {margin-bottom: 40px;position:relative;overflow:hidden;width: 100%; height: 100px;border: 2px solid rgba(100,100,100,0.60);border-radius: 5px;background: #fff;}
+#reserva #info {float:left;width: 250px;height: 100px;border-right: 1px solid silver;background: #f3f3f3;z-index:-1;}
+#reserva #info h3 {font-size: 15px;font-weight:bold;padding:23px 12px 7px 14px;color: rgba(0,0,0,0.85)}
+#reserva #info p {font-size: 13px;padding:0px 18px 0px 14px;color: #888;line-height: 15px;}
+
+#formReserva {width: 728px;position: absolute; top: 25%;left:252px;font-size: 13px;color: #888;padding-left: 23px;}
+#formReserva div {float: left;margin-right: 10px;}
+#formReserva input, #formReserva select, #formReserva button {margin-top: 10px;font-size: 13px;color: #888;padding:5px;}
+#formReserva button[type="submit"] {color: white;border:0px;border-bottom: 1px solid rgba(100,100,100,0.60);background: #32a2e3;}
+#formReserva button[type="submit"]:active {background: #3268e3;}
+
+#informacion {width: 100%;}
+#informacion ul {list-style: none;overflow: hidden;padding-bottom:225px;}
+#informacion ul li {width: 290px;float: left;margin-left: 54.4px;}
+#informacion ul li:first-child {margin: 0px;}
+#informacion ul li img {width: 100%;background:white;border: 1px solid rgba(100,100,100,0.60);border-radius: 2px;margin-bottom: 20px;}
+#informacion ul li h4 {color: rgba(0,0,0,0.85);font-size: 20px;margin-bottom: 7px;}
+#informacion ul li h4 span {font-weight: bold;}
+#informacion ul li p {font-size: 13px;color: #888;line-height: 15px;}
+
+#pie {height:70px;background: white;font-size: 13px;color: #888;line-height: 15px}
+#pieContent {width:980px; margin: 0 auto;/*position:relative;*/}
+#pieContent div {float:left;width: 320px;margin-top: 20px;/*position: absolute; top: 25%;*/}
+#pie ul {list-style: none;overflow: hidden;}
+#pie ul li {float:right;margin-left: 10px;}
+#pie #social {margin: 11px 10px;text-align: center;}
+
+#main{width: 980px; margin: 0 auto;z-index:-75;}
+
+.clear {clear: both;width: 0px; height: 0px;}
+.fija {position: fixed;top: 100px; width: 980px;}
