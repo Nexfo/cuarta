@@ -1,7 +1,3 @@
-#proyecto_hotel_homepage:
-#    pattern:  /hello/{name}
-#    defaults: { _controller: proyectoHotelBundle:Default:index }
-
 pagina_principal:
     pattern: /
     defaults: { _controller: proyectoHotelBundle:Default:index }
@@ -9,3 +5,8 @@ pagina_principal:
 pagina_reservas:
     pattern: /reservar
     defaults: { _controller: proyectoHotelBundle:Reservas:primera }
+
+pagina_reservas_habitacion:
+    pattern: /reservar/habitacion
+    defaults: { _controller: proyectoHotelBundle:Reservas:habitacion }
+#    methods:  [POST]

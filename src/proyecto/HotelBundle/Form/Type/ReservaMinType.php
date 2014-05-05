@@ -11,13 +11,13 @@ class ReservaMinType extends AbstractType
 	public function buildForm(FormBuilderInterface $builder, array $options)
     {
 		$builder
-			->add('tipo', 'entity', array('class' => 'proyectoHotelBundle:TipoHabitacion',
+			->add('tipo_habitacion', 'entity', array('class' => 'proyectoHotelBundle:TipoHabitacion',
 				'property' => 'nombre',
 				'query_builder' => function(EntityRepository $er) {
 					return $er->createQueryBuilder('e')
 					->orderBy('e.id', 'ASC');
 				},
-				"mapped" => false,
+				/*"mapped" => false,*/
 				'label' => 'Tipo de habitación:'
 			))
 			->add('fecha_entrada', 'datePicker', array('label' => 'Fecha de entrada'))
@@ -25,8 +25,8 @@ class ReservaMinType extends AbstractType
             ->add('adultos', 'choice', array(
 				'label' => 'Adultos',
 				'choices'   => array(
-					'1' => '1',
-					'2' => '2',
+					'1' => '1', '2' => '2', '3' => '3', '4' => '4', '5' => '5',
+					'6' => '6', '7' => '7', '8' => '8', '9' => '9',	'10' => '10'
 				),
 			))
 			->add('ninios', 'choice', array(

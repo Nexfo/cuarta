@@ -1,0 +1,8 @@
+proyecto\HotelBundle\Entity\Reserva:
+    properties:
+        fecha_entrada:
+            - NotBlank: ~
+            - Type: \DateTime
+        fecha_salida:
+            - NotBlank: ~
+            - Type: \DateTime

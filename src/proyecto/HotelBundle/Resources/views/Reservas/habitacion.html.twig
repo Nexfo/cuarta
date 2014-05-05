@@ -1,0 +1,44 @@
+{% extends 'proyectoHotelBundle::layout.html.twig' %}
+
+{% block titulo %}Reserva: seleccionar habitación{% endblock %}
+
+{% block stylesheets %}
+	<link rel="stylesheet" href="//code.jquery.com/ui/1.10.4/themes/smoothness/jquery-ui.css">
+	{{ parent() }}
+	<link rel="stylesheet" href="{{ asset('bundles/proyectohotel/css/estilo_reserva.css') }}" />
+{% endblock %}
+
+{% block cabecera %}
+	<div id="cabecera">
+		<div id="slogans">
+			<div id="c_s_1">
+				<div id="s_1">Reservas</div>
+				<div id="bg_s_1"> </div>
+			</div>
+		</div>
+	</div>
+{% endblock %}
+
+{% block banner_reserva %}{% endblock %}
+
+{% block contenido %}
+	<div id="proceso_reserva">
+		<ul>
+			<li><div><span>1</span></div>Información básica</li>
+			<li class="activo"><div><span>2</span></div>Seleccionar habitación</li>
+			<li><div><span>3</span></div>Información de cliente</li>
+			<li><div><span>4</span></div>Finalizar</li>
+		</ul>
+	</div>
+	<div id="info_reserva">
+		<h1>Información básica</h1>
+		<p>
+			You use the exact same code (without the tags) from your and put it in a .css file. Then, rather than having the tags in the head section of each page, with all the css duplicated, you link to the .css file instead with a simple link tag, like this...
+		</p>
+	</div>
+	{# datos #}
+	{{ "ID: " ~ id }}
+{% endblock %}
+
+{% block javascripts %}
+{% endblock %}

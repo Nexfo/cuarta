@@ -52,6 +52,26 @@ class Reserva
 	private $fecha_salida;
 	
 	/**
+	 * @var boolean
+	 *
+	 * @ORM\Column(name="confirmada", type="boolean")
+	 */
+	private $confirmada = 0;
+	
+	/**
+     * @var \DateTime
+     *
+     * @ORM\Column(name="fecha_pre_reserva", type="datetime")
+     */
+	private $fecha_pre_reserva;
+		
+	/**
+     * @ORM\ManyToOne(targetEntity="TipoHabitacion")
+     * @ORM\JoinColumn(name="tipo_habitacion", referencedColumnName="id")
+    */
+	private $tipo_habitacion;
+	
+	/**
      * @ORM\ManyToOne(targetEntity="Cliente", inversedBy="reservas")
      * @ORM\JoinColumn(name="cliente_id", referencedColumnName="id", onDelete="CASCADE")
 	 */
@@ -224,5 +244,74 @@ class Reserva
     public function getHabitaciones()
     {
         return $this->habitaciones;
+    }
+
+    /**
+     * Set confirmada
+     *
+     * @param boolean $confirmada
+     * @return Reserva
+     */
+    public function setConfirmada($confirmada)
+    {
+        $this->confirmada = $confirmada;
+
+        return $this;
+    }
+
+    /**
+     * Get confirmada
+     *
+     * @return boolean 
+     */
+    public function getConfirmada()
+    {
+        return $this->confirmada;
+    }
+
+    /**
+     * Set fecha_pre_reserva
+     *
+     * @param \DateTime $fechaPreReserva
+     * @return Reserva
+     */
+    public function setFechaPreReserva($fechaPreReserva)
+    {
+        $this->fecha_pre_reserva = $fechaPreReserva;
+
+        return $this;
+    }
+
+    /**
+     * Get fecha_pre_reserva
+     *
+     * @return \DateTime 
+     */
+    public function getFechaPreReserva()
+    {
+        return $this->fecha_pre_reserva;
+    }
+
+    /**
+     * Set tipo_habitacion
+     *
+     * @param \proyecto\HotelBundle\Entity\TipoHabitacion $tipoHabitacion
+     * @return Reserva
+     */
+    public function setTipoHabitacion(\proyecto\HotelBundle\Entity\TipoHabitacion $tipoHabitacion = null)
+    {
+        $this->tipo_habitacion = $tipoHabitacion;
+
+        return $this;
+    }
+
+    /**
+     * Get tipo_habitacion
+     *
+     * @return \proyecto\HotelBundle\Entity\TipoHabitacion 
+     */
+    public function getTipoHabitacion()
+    {
+        return $this->tipo_habitacion;
     }
 }

@@ -5,6 +5,10 @@ body {
 
 #menu {z-index: 9999;position: fixed;height: 90px; width: 100%; background: rgba(0,0,0,0.85);border-bottom: 2px solid rgba(100,100,100,0.40);}
 #menuContent {width:980px; margin: 0 auto;color: white;padding-top: 22.5px;}
+#menuContent a {color: white;text-decoration: none}
+#menuContent a:hover {color: #DDD;text-decoration: none}
+#menuContent a:active {color: #32A2E3;text-decoration: none}
+.menuActivo {color: #32A2E3;text-decoration: none;font-weight: bold;}
 
 #logotipo, #opciones{float:left; display: inline; }
 
@@ -25,6 +29,9 @@ body {
 #pie ul {list-style: none;overflow: hidden;}
 #pie ul li {float:right;margin-left: 10px;}
 #pie #social {margin: 11px 10px;text-align: center;}
+#pie a {color: #888;text-decoration: none}
+#pie a:hover {color: #bbb;text-decoration: none}
+#pie a:active {color: #32A2E3;text-decoration: none}
 
 #main{width: 980px; margin: 0 auto;z-index:-75;}
 

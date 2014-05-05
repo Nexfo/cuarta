@@ -71,4 +71,37 @@ class TipoHabitacion
     {
         return $this->nombre;
     }
+
+    /**
+     * Add habitaciones
+     *
+     * @param \proyecto\HotelBundle\Entity\Habitacion $habitaciones
+     * @return TipoHabitacion
+     */
+    public function addHabitacione(\proyecto\HotelBundle\Entity\Habitacion $habitaciones)
+    {
+        $this->habitaciones[] = $habitaciones;
+
+        return $this;
+    }
+
+    /**
+     * Remove habitaciones
+     *
+     * @param \proyecto\HotelBundle\Entity\Habitacion $habitaciones
+     */
+    public function removeHabitacione(\proyecto\HotelBundle\Entity\Habitacion $habitaciones)
+    {
+        $this->habitaciones->removeElement($habitaciones);
+    }
+
+    /**
+     * Get habitaciones
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getHabitaciones()
+    {
+        return $this->habitaciones;
+    }
 }
