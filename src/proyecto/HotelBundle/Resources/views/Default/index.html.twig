@@ -1,7 +1,8 @@
 {% extends 'proyectoHotelBundle::layout.html.twig' %}
 {% block stylesheets %}
 	<link rel="stylesheet" href="//code.jquery.com/ui/1.10.4/themes/smoothness/jquery-ui.css">
-	{{ parent() }}
+	{{ parent() }}	
+	<link rel="stylesheet" href="{{ asset('bundles/proyectohotel/css/estilo_index.css') }}" />
 {% endblock %}
 
 {% form_theme form 'proyectoHotelBundle:Form:form_reserva_type.html.twig' %}

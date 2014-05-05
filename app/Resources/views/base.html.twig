@@ -2,18 +2,18 @@
 <html>
     <head>
         <meta charset="UTF-8" />
-        <title>{% block title %}Welcome!{% endblock %}</title>
+        <title>{% block titulo %}Hotel Symfony II{% endblock %}</title>
 		<link href='//fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css'>
         {% block stylesheets %}
 			<link rel="stylesheet" href="{{ asset('bundles/proyectohotel/css/reset.css') }}" />
-			<link rel="stylesheet" href="{{ asset('bundles/proyectohotel/css/estilos.css') }}" />
+			<link rel="stylesheet" href="{{ asset('bundles/proyectohotel/css/base.css') }}" />
 		{% endblock %}
         <link rel="icon" type="image/x-icon" href="{# asset('favicon.ico') #}" />
     </head>
     <body>
 		<div id="menu">
 			<div id="menuContent">
-				<div id="logotipo"><h1>Symfony II Hotel</h1></div>
+				<div id="logotipo"><h1>Hotel Symfony II</h1></div>
 				<div id="opciones">
 					<ul>
 						<li>Hotel</li>
