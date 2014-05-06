@@ -92,7 +92,6 @@ class Cliente
 
     public function __construct()
     {
-        parent::__construct();
         $this->reservas = new ArrayCollection();
     }
 

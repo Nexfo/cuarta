@@ -1,0 +1,109 @@
+{% extends 'proyectoHotelBundle::layout.html.twig' %}
+
+{% block titulo %}Reserva: información de cliente{% endblock %}
+
+{% block stylesheets %}
+	<link rel="stylesheet" href="//code.jquery.com/ui/1.10.4/themes/smoothness/jquery-ui.css">
+	{{ parent() }}
+	<link rel="stylesheet" href="{{ asset('bundles/proyectohotel/css/reservas/estilo_reserva_cliente.css') }}" />
+{% endblock %}
+
+{% block cabecera %}
+	<div id="cabecera">
+		<div id="slogans">
+			<div id="c_s_1">
+				<div id="s_1">Reservas</div>
+				<div id="bg_s_1"> </div>
+			</div>
+		</div>
+	</div>
+{% endblock %}
+
+{% block banner_reserva %}{% endblock %}
+
+{% form_theme form 'proyectoHotelBundle:Form:form_reserva_type.html.twig' %}
+{% block contenido %}
+	<div id="proceso_reserva">
+		<ul>
+			<li><div><span>1</span></div>Información básica</li>
+			<li><div><span>2</span></div>Seleccionar habitación</li>
+			<li class="activo"><div><span>3</span></div>Información de cliente</li>
+			<li><div><span>4</span></div>Finalizar</li>
+		</ul>
+	</div>
+	
+	<div id="info_reserva">
+		<h1>Información básica</h1>
+		<p>
+			You use the exact same code (without the tags) from your and put it in a .css file. Then, rather than having the tags in the head section of each page, with all the css duplicated, you link to the .css file instead with a simple link tag, like this...
+		</p>
+	</div>
+	<div id="form_cliente">
+		{{ form_start(form, {'attr': {'novalidate': 'novalidate'}}) }}
+			<div class="i">
+				<span>{{ form_label(form.nombre) }}</span><br/>
+				{{ form_widget(form.nombre) }}
+			</div>
+				
+			<div class="d">
+				<span>{{ form_label(form.primerApellido) }}</span><br/>
+				{{ form_widget(form.primerApellido) }}
+			</div>
+		
+			<div class="i">
+				<span>{{ form_label(form.segundoApellido) }}</span><br/>
+				{{ form_widget(form.segundoApellido) }}
+			</div>
+				
+			<div class="d">
+				<span>{{ form_label(form.direccion) }}</span><br/>
+				{{ form_widget(form.direccion) }}
+			</div>
+		
+			<div class="i">
+				<span>{{ form_label(form.ciudad) }}</span><br/>
+				{{ form_widget(form.ciudad) }}
+			</div>
+			
+			<div class="d">
+				<span>{{ form_label(form.provincia) }}</span><br/>
+				{{ form_widget(form.provincia) }}
+			</div>
+			
+			<div class="i">
+				<span>{{ form_label(form.cod_postal) }}</span><br/>
+				{{ form_widget(form.cod_postal) }}
+			</div>
+			
+			<div class="d">
+				<span>{{ form_label(form.telefono) }}</span><br/>
+				{{ form_widget(form.telefono) }}
+			</div>
+			
+			<div id="info_email">
+				<p>
+					Por favor, introduce tu dirección de correo electrónico válida para poder confirmar la reserva y permanecer en contacto.
+				</p>
+			</div>
+			
+			<div class="i">
+				<span>{{ form_label(form.email) }}</span><br/>
+				{{ form_widget(form.email) }}
+			</div>
+			
+			<div class="d">
+				<span>{{ form_label(form.email2) }}</span><br/>
+				{{ form_widget(form.email2) }}
+			</div>
+		
+			<div class="botones clear">
+				{{ form_widget(form.volver) }}
+
+				{{ form_widget(form.reservar) }}
+			</div>
+		{{ form_end(form) }}
+	</div>
+	<div class="clear"></div>
+{% endblock %}
+
+{% block javascripts %}{% endblock %}

@@ -12,7 +12,7 @@ class DefaultController extends Controller
     {
 		$reserva = new Reserva();
 		$form = $this->createForm(new ReservaMinType(), $reserva, array(
-			'action' => $this->generateUrl('pagina_reservas_habitacion')
+			'action' => $this->generateUrl('pagina_reservas')
 		));
 		
         return $this->render('proyectoHotelBundle:Default:index.html.twig', array('form' => $form->createView()));

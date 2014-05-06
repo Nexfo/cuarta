@@ -1,4 +1,4 @@
-#fondo {position: absolute;height:260px; width: 100%; background: silver url('../imgs/bg_reserv.jpg') no-repeat center 10%;z-index:-100;}
+#fondo {position: absolute;height:260px; width: 100%; background: silver url('../../imgs/bg_reserv.jpg') no-repeat center 10%;z-index:-100;}
 
 #cabecera {height: 260px; width: 100%;position: relative;}
 #cabecera #slogans {position: absolute;bottom:0px;color: white;z-index:-100;overflow:hidden;}
@@ -8,7 +8,7 @@
 #bg_s_1{opacity: 0.8;width: 10px;}
 
 #s_1 {background: rgba(50,162,227,0.8);font-size: 19px;font-weight:bold;}
-#bg_s_1 {background: transparent url("../imgs/bg_blue.png") no-repeat;height: 19px;}
+#bg_s_1 {background: transparent url("../../imgs/bg_blue.png") no-repeat;height: 19px;}
 
 #informacion {width: 100%;}
 #proceso_reserva {box-shadow: 0px 4px 10px #ccc;background:white;text-align:center;height: 50px;border-top: 1px solid;border-bottom: 1px solid; border-color: rgba(100,100,100,0.40);}
@@ -25,13 +25,14 @@
 #info_reserva  h1 {color: #444;font-size: 21px;margin-bottom: 20px;}
 #info_reserva  p {color: #888;font-size: 13px;margin-bottom: 20px;line-height:15px;}
 
-#form_reserva {width: 563px;height: 350px;margin: 0px auto;padding-top: 30px;}
-#form_reserva div {float:left;margin-right: 15px;}
-#form_reserva .fila {margin-bottom: 20px;width: 563px;}
-#form_reserva input, #form_reserva select, #form_reserva button {/*border-radius: 5px;*/margin-top: 10px;font-size: 13px;color: #888;padding:10px;}
-#form_reserva input {width: 244px;}
-#form_reserva #habitacion select {width: 268px;}
-#form_reserva #adultos select, #form_reserva #ninios select {width: 125px;}
-#form_reserva #boton {width: 563px;margin-top: 20px;padding-top: 30px;border-top: 1px dashed rgba(100,100,100,0.40);text-align: center; float:none; clear: both;display: block;}
-#form_reserva button[type="submit"] {width: 200px; padding: 10px; color: white;border:0px;border-bottom: 1px solid rgba(100,100,100,0.60);background: #32a2e3;}
-#form_reserva button[type="submit"]:active {background: #3268e3;}
+#form_cliente {width: 533px; margin: 0px auto;padding: 25px 15px 50px 15px;}
+#form_cliente input, #form_cliente select,#form_cliente button {width: 220px;margin-top: 7px;font-size: 13px;color: #888;padding:7px 10px;}
+#form_cliente  form div {margin-bottom: 15px;}
+#form_cliente  form {text-align: center;}
+#form_cliente  form span {float: left;}
+.d {float: right;}
+.i {float:left;}
+.botones {display: inline;}
+
+#info_email {display: inline-block;margin-bottom: 5px; margin-top: 10px;padding-top: 17px; border-top: 1px dashed rgba(100,100,100,0.40);}
+#info_email p {color: #888;font-size: 13px;line-height:15px;text-align: left;}

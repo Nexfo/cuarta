@@ -17,7 +17,6 @@ class ReservaMinType extends AbstractType
 					return $er->createQueryBuilder('e')
 					->orderBy('e.id', 'ASC');
 				},
-				/*"mapped" => false,*/
 				'label' => 'Tipo de habitación:'
 			))
 			->add('fecha_entrada', 'datePicker', array('label' => 'Fecha de entrada'))
