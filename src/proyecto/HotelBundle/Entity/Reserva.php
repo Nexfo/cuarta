@@ -59,6 +59,13 @@ class Reserva
 	private $confirmada = 0;
 	
 	/**
+	 * @var string
+	 *
+	 * @ORM\Column(name="uniCod", type="string", unique=true, nullable=true, length=32)
+	 */
+	private $uniCod;
+	
+	/**
      * @var \DateTime
      *
      * @ORM\Column(name="fecha_pre_reserva", type="datetime")
@@ -313,5 +320,28 @@ class Reserva
     public function getTipoHabitacion()
     {
         return $this->tipo_habitacion;
+    }
+
+    /**
+     * Set uniCod
+     *
+     * @param string $uniCod
+     * @return Reserva
+     */
+    public function setUniCod($uniCod)
+    {
+        $this->uniCod = $uniCod;
+
+        return $this;
+    }
+
+    /**
+     * Get uniCod
+     *
+     * @return string 
+     */
+    public function getUniCod()
+    {
+        return $this->uniCod;
     }
 }

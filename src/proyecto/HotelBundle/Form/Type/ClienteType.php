@@ -14,13 +14,16 @@ class ClienteType extends AbstractType
 			->add('nombre')
 			->add('primerApellido')
 			->add('segundoApellido')
-			->add('direccion')
+			->add('direccion', 'text', array('label' => 'Dirección'))
 			->add('ciudad')
 			->add('provincia')
-			->add('cod_postal')
-			->add('telefono')
+			->add('cod_postal', 'text', array('label' => 'Código postal'))
+			->add('telefono', 'text', array('label' => 'Teléfono'))
 			->add('email')
-			->add('email2', 'email', array('mapped' => false))
+			->add('email2', 'email', array(
+				'mapped' => false,
+				'label' => 'Repetir email'
+			))
 			->add('volver', 'submit')
 			->add('reservar', 'submit');
     }

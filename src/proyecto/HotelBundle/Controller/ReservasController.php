@@ -9,6 +9,7 @@ use proyecto\HotelBundle\Form\Type\ClienteType;
 use proyecto\HotelBundle\Entity\Cliente;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Session;
+use Symfony\Component\Form\FormError;
 
 class ReservasController extends Controller
 {
@@ -52,10 +53,7 @@ class ReservasController extends Controller
 		$reserva = null;
 		$objDoctrine = $this->getDoctrine()->getManager();
 		
-		if ($session->has("id_reserva")) {
-			$repositorio = $this->getDoctrine()->getRepository('proyectoHotelBundle:Reserva');
-			$reserva = $repositorio->find($session->get("id_reserva"));
-		} else {
+		if (!($reserva = self::cargarReserva($session))) {
 			return $this->redirect($this->generateUrl('pagina_reservas'));
 		}
 		
@@ -90,14 +88,135 @@ class ReservasController extends Controller
 	
 	public function clienteAction(Request $request)
     {
+		$objDoctrine = $this->getDoctrine()->getManager();
+		$session = $this->get("session");
+		$reserva = null;
+		
+		if (!($reserva = self::cargarReserva($session))) {
+			return $this->redirect($this->generateUrl('pagina_reservas'));
+		}
+		
+		if (!is_null($request->get('cliente'))) {
+			if (array_key_exists('volver', $request->get('cliente'))) {
+				$query = $objDoctrine->createQuery(
+					'SELECT h
+					 FROM proyectoHotelBundle:Habitacion h
+					 WHERE h.reserva = :reserva'
+				)->setParameter('reserva', $reserva);
+				
+				$reserva->setFechaPreReserva(new \DateTime("now"));
+				$objDoctrine->persist($reserva);
+				
+				$habitaciones = $query->getResult();
+				
+				foreach ($habitaciones as $habitacion) {
+					$objDoctrine->persist($habitacion->setReserva(null));
+				}
+				
+				$objDoctrine->flush();
+				
+				return $this->redirect($this->generateUrl('pagina_reservas_habitacion'));
+			}
+		}
+		
 		$cliente = new Cliente();
-		$form = $this->createForm(new ClienteType(), $cliente/*, array(
-			'action' => $this->generateUrl('pagina_reservas')
-		)*/);
+		$form = $this->createForm(new ClienteType(), $cliente);
+		
+		$form->handleRequest($request);
+			
+		$aCliente = $request->get('cliente');
+		$error = ""; $errorBool = true;
+		if ($aCliente['email'] != $aCliente['email2']) {
+			$error = 'Debes introducir el mismo email dos veces.';
+			$errorBool = false;
+		}
+		
+		if ($form->isValid() && $errorBool) {
+			$query = $objDoctrine->createQuery(
+				'SELECT c
+				 FROM proyectoHotelBundle:Cliente c
+				 WHERE c.email = :email'
+			)->setParameter('email', $cliente->getEmail());
+			$rCliente = $query->getOneOrNullResult();
+			
+			//$reserva->setFechaPreReserva(new \DateTime("now"));
+			$objDoctrine->persist($reserva->setFechaPreReserva(new \DateTime("now")));
+			
+			if (is_null($rCliente)) {
+				$objDoctrine->persist($cliente);
+			} else {
+				if (is_null($rCliente->getSegundoApellido()) && ($cliente->getSegundoApellido() != "")) {
+					$rCliente->setSegundoApellido($cliente->getSegundoApellido());
+				}
+				$cliente = $rCliente;
+			}
+			
+			$objDoctrine->persist($reserva->setCliente($cliente));
+			$objDoctrine->flush();
+			
+			return $this->redirect($this->generateUrl('pagina_reservas_finalizar'));
+		}
 		
         return $this->render('proyectoHotelBundle:Reservas:cliente.html.twig',
 			array('form' => $form->createView(),
+			'error' => $error
 		));
+	}
+	
+	public function finalizarAction(Request $request)
+    {
+		$reserva = null;
+		$sesion = $this->get("session");
+		$objDoctrine = $this->getDoctrine()->getManager();
+		
+		if (!($reserva = self::cargarReserva($sesion))) {
+			return $this->redirect($this->generateUrl('pagina_reservas'));
+		}
+		
+		$uniCod = md5(round(microtime(true) * 1000));
+		
+		$reserva->setUniCod($uniCod);
+		$objDoctrine->persist($reserva->setFechaPreReserva(new \DateTime("now")));
+		$objDoctrine->flush();
+		
+		$email = \Swift_Message::newInstance()
+			->setContentType("text/html")
+			->setSubject('Confirma tu reserva')
+			->setFrom('symfony2hotel@gmail.com')
+			->setTo($reserva->getCliente()->getEmail())
+			->setBody(
+				$this->renderView(
+					'proyectoHotelBundle:Reservas:email.html.twig',
+					array(
+					'codigo' => $uniCod,
+					'nombre' => $reserva->getCliente()->getNombre())
+				)
+			)
+		;
+		$this->get('mailer')->send($email);
+		
+		$sesion->remove("id_reserva");
+		
+		return $this->render('proyectoHotelBundle:Reservas:finalizar.html.twig',
+			array('codigo' => $uniCod,
+			'email' => $reserva->getCliente()->getEmail()
+		));
+	}
+	
+	public function confirmarAction(Request $request, $codigo)
+    {
+		return $this->render('proyectoHotelBundle:Reservas:confirmar.html.twig',
+			array('codigo' => $codigo
+		));
+	}
+	
+	private function cargarReserva($sesion) {
+		if ($sesion->has("id_reserva")) {
+			$repositorio = $this->getDoctrine()->getRepository('proyectoHotelBundle:Reserva');
+			return $repositorio->find($sesion->get("id_reserva"));
+		} else {
+			return false;
+		}
 	}
 	
 	private function reservarHabitaciones($idHabitaciones, $doctrine, $reserva) {

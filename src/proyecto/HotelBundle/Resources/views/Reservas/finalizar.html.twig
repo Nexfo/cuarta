@@ -1,0 +1,52 @@
+{% extends 'proyectoHotelBundle::layout.html.twig' %}
+
+{% block titulo %}Reserva: finalizar{% endblock %}
+
+{% block stylesheets %}
+	<link rel="stylesheet" href="//code.jquery.com/ui/1.10.4/themes/smoothness/jquery-ui.css">
+	{{ parent() }}
+	<link rel="stylesheet" href="{{ asset('bundles/proyectohotel/css/reservas/estilo_reserva_finalizar.css') }}" />
+{% endblock %}
+
+{% block cabecera %}
+	<div id="cabecera">
+		<div id="slogans">
+			<div id="c_s_1">
+				<div id="s_1">Reservas</div>
+				<div id="bg_s_1"> </div>
+			</div>
+		</div>
+	</div>
+{% endblock %}
+
+{% block banner_reserva %}{% endblock %}
+
+{% block contenido %}
+	<div id="proceso_reserva">
+		<ul>
+			<li><div><span>1</span></div>Información básica</li>
+			<li><div><span>2</span></div>Seleccionar habitación</li>
+			<li><div><span>3</span></div>Información de cliente</li>
+			<li class="activo"><div><span>4</span></div>Finalizar</li>
+		</ul>
+	</div>
+	<div id="info_reserva">
+		<h1>Finalizar</h1>
+	</div>
+	<div id="confirmacion">
+		<div id="info">
+			¡Gracias por su reserva!
+		</div>
+		<div id="datos">
+			Información enviada a <span>{{ email }}</span><br/>
+			Código: <span>{{ codigo }}</span><br />
+			Por favor, confirme su reserva en menos de 15 minutos
+		</div>
+		<a id="inicio"  href="{{ path('pagina_principal') }}">
+			Volver a la página principal
+		</a>
+	</div>
+	<div class="clear"></div>
+{% endblock %}
+
+{% block javascripts %}{% endblock %}

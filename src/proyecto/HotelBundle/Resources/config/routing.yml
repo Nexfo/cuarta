@@ -9,8 +9,15 @@ pagina_reservas:
 pagina_reservas_habitacion:
     pattern: /reservar/habitacion
     defaults: { _controller: proyectoHotelBundle:Reservas:habitacion }
-#    methods:  [POST]
 
 pagina_reservas_cliente:
     pattern: /reservar/cliente
     defaults: { _controller: proyectoHotelBundle:Reservas:cliente }
+
+pagina_reservas_finalizar:
+    pattern: /reservar/finalizar
+    defaults: { _controller: proyectoHotelBundle:Reservas:finalizar }
+
+pagina_reservas_confirmar:
+    pattern: /reservar/confirmar/{codigo}
+    defaults: { _controller: proyectoHotelBundle:Reservas:confirmar }

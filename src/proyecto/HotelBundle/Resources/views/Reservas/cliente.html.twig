@@ -21,7 +21,6 @@
 
 {% block banner_reserva %}{% endblock %}
 
-{% form_theme form 'proyectoHotelBundle:Form:form_reserva_type.html.twig' %}
 {% block contenido %}
 	<div id="proceso_reserva">
 		<ul>
@@ -33,12 +32,26 @@
 	</div>
 	
 	<div id="info_reserva">
-		<h1>Información básica</h1>
+		<h1>Información de cliente</h1>
 		<p>
 			You use the exact same code (without the tags) from your and put it in a .css file. Then, rather than having the tags in the head section of each page, with all the css duplicated, you link to the .css file instead with a simple link tag, like this...
 		</p>
 	</div>
 	<div id="form_cliente">
+		{% if not form.vars.valid or error != "" %}
+			<div id="errores">
+				{{ form_errors(form.nombre) }}
+				{{ form_errors(form.primerApellido) }}
+				{{ form_errors(form.segundoApellido) }}
+				{{ form_errors(form.direccion) }}
+				{{ form_errors(form.ciudad) }}
+				{{ form_errors(form.provincia) }}
+				{{ form_errors(form.cod_postal) }}
+				{{ form_errors(form.telefono) }}
+				{{ form_errors(form.email) }}
+				{{ error }}
+			</div>
+		{% endif %}
 		{{ form_start(form, {'attr': {'novalidate': 'novalidate'}}) }}
 			<div class="i">
 				<span>{{ form_label(form.nombre) }}</span><br/>
@@ -95,12 +108,18 @@
 				<span>{{ form_label(form.email2) }}</span><br/>
 				{{ form_widget(form.email2) }}
 			</div>
-		
-			<div class="botones clear">
+		<div class="clear"></div>
+			<div class="botones">
+				<div class="i">
 				{{ form_widget(form.volver) }}
+				</div>
 
+				<div class="d">
 				{{ form_widget(form.reservar) }}
+				</div>
+						<div class="clear"></div>
 			</div>
+
 		{{ form_end(form) }}
 	</div>
 	<div class="clear"></div>

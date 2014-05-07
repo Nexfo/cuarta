@@ -1,0 +1,9 @@
+Hola {{ nombre }}, gracias por realizar tu reserva.<br /><br />
+
+Para confirmar tu reserva debes acceder al siguiente enlace:<br />
+- <a href="{{ url('pagina_reservas_confirmar', {'codigo': codigo}) }}">Confirmar reserva</a>.
+
+<br /><br />
+
+Si no puedes acceder, copia y pega la siguiente dirección en tu navegador:<br />
+- {{ url('pagina_reservas_confirmar', {'codigo': codigo}) }}

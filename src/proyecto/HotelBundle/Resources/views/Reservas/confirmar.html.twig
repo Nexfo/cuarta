@@ -1,0 +1,33 @@
+{% extends 'proyectoHotelBundle::layout.html.twig' %}
+
+{% block titulo %}Reserva: confirmar{% endblock %}
+
+{% block stylesheets %}
+	<link rel="stylesheet" href="//code.jquery.com/ui/1.10.4/themes/smoothness/jquery-ui.css">
+	{{ parent() }}
+	<link rel="stylesheet" href="{{ asset('bundles/proyectohotel/css/reservas/estilo_reserva_confirmar.css') }}" />
+{% endblock %}
+
+{% block cabecera %}
+	<div id="cabecera">
+		<div id="slogans">
+			<div id="c_s_1">
+				<div id="s_1">Reservas</div>
+				<div id="bg_s_1"> </div>
+			</div>
+		</div>
+	</div>
+{% endblock %}
+
+{% block banner_reserva %}{% endblock %}
+
+{% block contenido %}
+	<div id="info_reserva">
+		<h1>Confirmar</h1>
+	</div>
+	<div id="confirmacion">
+		<span>{{ codigo }}</span>
+	</div>
+{% endblock %}
+
+{% block javascripts %}{% endblock %}

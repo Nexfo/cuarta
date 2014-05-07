@@ -21,18 +21,24 @@
 #proceso_reserva ul li.activo {color:#000;}
 #proceso_reserva ul li.activo div {color:#fff;background:#32a2e3;}
 
-#info_reserva {padding-bottom: 5px;padding-top: 30px;width: 563px; margin: 0px auto;border-bottom: 1px dashed rgba(100,100,100,0.40);}
+#info_reserva {padding-bottom: 5px;padding-top: 30px;width: 563px;margin: 0px auto;border-bottom: 1px dashed rgba(100,100,100,0.40);}
 #info_reserva  h1 {color: #444;font-size: 21px;margin-bottom: 20px;}
 #info_reserva  p {color: #888;font-size: 13px;margin-bottom: 20px;line-height:15px;}
 
-#form_cliente {width: 533px; margin: 0px auto;padding: 25px 15px 50px 15px;}
+#form_cliente {width: 533px;margin: 0px auto;padding: 25px 15px 20px 15px;}
 #form_cliente input, #form_cliente select,#form_cliente button {width: 220px;margin-top: 7px;font-size: 13px;color: #888;padding:7px 10px;}
 #form_cliente  form div {margin-bottom: 15px;}
 #form_cliente  form {text-align: center;}
 #form_cliente  form span {float: left;}
 .d {float: right;}
 .i {float:left;}
-.botones {display: inline;}
+.botones {padding-top: 20px; border-top: 1px dashed rgba(100,100,100,0.40);}
+#form_cliente button[type="submit"] {color: white;border:0px;border-bottom: 1px solid rgba(100,100,100,0.60);background: #32a2e3;}
+#form_cliente button[type="submit"]:active {background: #3268e3;}
+#form_cliente .botones .i button[type="submit"] {background: #bbb;}
+#form_cliente .botones .i button[type="submit"]:active {background: #ccc;}
 
-#info_email {display: inline-block;margin-bottom: 5px; margin-top: 10px;padding-top: 17px; border-top: 1px dashed rgba(100,100,100,0.40);}
+#info_email {display: inline-block;margin-bottom: 5px;margin-top: 10px;padding-top: 17px;border-top: 1px dashed rgba(100,100,100,0.40);}
 #info_email p {color: #888;font-size: 13px;line-height:15px;text-align: left;}
+
+#errores {background: #FF8080;border: 1px solid #FF0000;padding: 15px;margin-bottom: 20px;}

@@ -1,0 +1,21 @@
+#fondo {box-shadow: 0px 4px 15px #aaa;position: absolute;height:260px; width: 100%; background: silver url('../../imgs/bg_reserv.jpg') no-repeat center 10%;z-index:-100;}
+
+#cabecera {height: 260px; width: 100%;position: relative;}
+#cabecera #slogans {position: absolute;bottom:0px;color: white;z-index:-100;overflow:hidden;}
+
+#s_1, #bg_s_1{display:inline-block;float:left;padding: 7px 14px;}
+#s_1 {text-transform:uppercase;}
+#bg_s_1{opacity: 0.8;width: 10px;}
+
+#s_1 {background: rgba(50,162,227,0.8);font-size: 19px;font-weight:bold;}
+#bg_s_1 {background: transparent url("../../imgs/bg_blue.png") no-repeat;height: 19px;}
+
+#informacion {width: 100%;}
+
+#info_reserva {padding-bottom: 5px;padding-top: 30px;width: 563px;margin: 0px auto;border-bottom: 1px dashed rgba(100,100,100,0.40);}
+#info_reserva  h1 {color: #444;font-size: 21px;margin-bottom: 20px;}
+#info_reserva  p {color: #888;font-size: 13px;margin-bottom: 20px;line-height:15px;}
+
+#confirmacion {width: 563px;margin: 25px auto;}
+
+#pie {position: absolute; bottom: 0px;}

@@ -39,7 +39,7 @@ class Cliente
 	/**
 	 * @var string
 	 * 
-	 * @ORM\Column(name="segundo_apellido", type="string")
+	 * @ORM\Column(name="segundo_apellido", type="string", nullable=true)
 	 */
 	private $segundoApellido;
 	
@@ -81,7 +81,7 @@ class Cliente
 	/**
 	 * @var string
 	 * 
-	 * @ORM\Column(name="email", type="string")
+	 * @ORM\Column(name="email", type="string", unique=true)
 	 */
 	private $email;
 	
