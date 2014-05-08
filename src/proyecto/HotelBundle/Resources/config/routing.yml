@@ -21,3 +21,14 @@ pagina_reservas_finalizar:
 pagina_reservas_confirmar:
     pattern: /reservar/confirmar/{codigo}
     defaults: { _controller: proyectoHotelBundle:Reservas:confirmar }
+
+contacto:
+    path:     /contacto
+    defaults: { _controller: proyectoHotelBundle:Contacto:mostrar }
+    methods:  [GET]
+
+procesar_contacto:
+    path:     /contacto
+    defaults: { _controller: proyectoHotelBundle:Contacto:procesar }
+    methods:  [POST]
+

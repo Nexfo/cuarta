@@ -80,13 +80,16 @@ class Reserva
 	
 	/**
      * @ORM\ManyToOne(targetEntity="Cliente", inversedBy="reservas")
-     * @ORM\JoinColumn(name="cliente_id", referencedColumnName="id", onDelete="CASCADE")
+     * @ORM\JoinColumn(name="cliente_id", referencedColumnName="id")
 	 */
 	private $cliente;
 	
-    /**
-     * @ORM\OneToMany(targetEntity="Habitacion", mappedBy="reserva")
-     */
+    /* @ORM\OneToMany(targetEntity="Habitacion", mappedBy="reserva") */
+	
+	/**
+     * @ORM\ManyToMany(targetEntity="Habitacion", inversedBy="reservas")
+     * @ORM\JoinTable(name="reservas_habitaciones")
+     **/
 	private $habitaciones;
 	
     public function __construct()

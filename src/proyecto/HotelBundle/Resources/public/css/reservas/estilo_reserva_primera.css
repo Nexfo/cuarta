@@ -1,0 +1,12 @@
+#form_reserva {width: 563px;height: 350px;margin: 0px auto;padding-top: 30px;}
+#form_reserva div {float:left;margin-right: 15px;}
+#form_reserva .fila {margin-bottom: 20px;width: 563px;}
+#form_reserva input, #form_reserva select, #form_reserva button {margin-top: 10px;font-size: 13px;color: #888;padding:10px;}
+#form_reserva input {width: 244px;}
+#form_reserva #habitacion select {width: 268px;}
+#form_reserva #adultos select, #form_reserva #ninios select {width: 125px;}
+#form_reserva #boton {width: 563px;margin-top: 20px;padding-top: 30px;border-top: 1px dashed rgba(100,100,100,0.40);text-align: center; float:none; clear: both;display: block;}
+#form_reserva button[type="submit"] {width: 200px; padding: 10px; color: white;border:0px;border-bottom: 1px solid rgba(100,100,100,0.60);background: #32a2e3;}
+#form_reserva button[type="submit"]:active {background: #3268e3;}
+
+#form_reserva #errores {float: none;background: #FF8080;border: 1px solid #FF0000;color: #FF0000;padding: 15px;margin-bottom: 20px;}

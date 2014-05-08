@@ -1,10 +1,10 @@
 proyecto\HotelBundle\Entity\Reserva:
     properties:
         fecha_entrada:
-            - NotBlank: ~
+            - NotBlank: { message: "Debes seleccionar una fecha de entrada." }
             - Type: \DateTime
         fecha_salida:
-            - NotBlank: ~
+            - NotBlank: { message: "Debes seleccionar una fecha de salida." }
             - Type: \DateTime
 
 proyecto\HotelBundle\Entity\Cliente:

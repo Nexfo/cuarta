@@ -5,6 +5,7 @@
 {% block stylesheets %}
 	<link rel="stylesheet" href="//code.jquery.com/ui/1.10.4/themes/smoothness/jquery-ui.css">
 	{{ parent() }}
+	<link rel="stylesheet" href="{{ asset('bundles/proyectohotel/css/reservas/estilo_reserva_base.css') }}" />
 	<link rel="stylesheet" href="{{ asset('bundles/proyectohotel/css/reservas/estilo_reserva_habitacion.css') }}" />
 {% endblock %}
 
@@ -30,27 +31,33 @@
 			<li><div><span>4</span></div>Finalizar</li>
 		</ul>
 	</div>
-
+	
 	<div id="habitaciones">
-		<form method="POST" action="">
-			{% for habitacion in habitaciones if habitacion.reserva is empty%}
-				<div id="habitacion">
-					<div id="imagen">
-						<img src="{{ asset('bundles/proyectohotel/imgs/' ~ habitacion.imagen) }}" />
-					</div>
-					<div id="descripcion">
-						<h1>{{ habitacion.nombre }}</h1>
-						<div id="seleccion">
-							<span id="precio">{{ habitacion.precio }} €</span>
-							Seleccionar <input type="checkbox" value="{{ habitacion.id }}" id="checkboxFive" name="habitacion[]" />
+		{% if error != "" %}
+			<div id="errores">
+				<span>{{ error }}</span>
+			</div>
+		{% else %}
+			<form method="POST" action="">
+				{% for habitacion in habitaciones%}
+					<div id="habitacion">
+						<div id="imagen">
+							<img src="{{ asset('bundles/proyectohotel/imgs/' ~ habitacion.imagen) }}" />
+						</div>
+						<div id="descripcion">
+							<h1>{{ habitacion.nombre }}</h1>
+							<div id="seleccion">
+								<span id="precio">{{ habitacion.precio }} €</span>
+								Seleccionar <input type="checkbox" value="{{ habitacion.id }}" id="checkboxFive" name="habitacion[]" />
+							</div>
 						</div>
 					</div>
+				{% endfor %}
+				<div id="boton_hab">
+					<button type="submit">Seleccionar</button>
 				</div>
-			{% endfor %}
-			<div id="boton_hab">
-				<button type="submit">Seleccionar</button>
-			</div>
-		</form>
+			</form>
+		{% endif %}
 	</div>
 	<div id="formulario_reserva">
 		<h1>Cambiar reserva</h1>

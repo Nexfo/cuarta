@@ -3,6 +3,7 @@
 namespace proyecto\HotelBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Doctrine\Common\Collections\ArrayCollection;
 
 /**
  * Habitacion
@@ -43,17 +44,23 @@ class Habitacion
 	private $precio;
 	
 	/**
-     * @ORM\ManyToOne(targetEntity="TipoHabitacion")
+     * @ORM\ManyToOne(targetEntity="TipoHabitacion", inversedBy="habitaciones")
      * @ORM\JoinColumn(name="tipo_id", referencedColumnName="id")
     */
 	private $tipo;
 	
 	/**
-     * @ORM\ManyToOne(targetEntity="Reserva", inversedBy="habitaciones")
-     * @ORM\JoinColumn(name="reserva_id", referencedColumnName="id", onDelete="CASCADE")
+     * @ORM\ManyToMany(targetEntity="Reserva", mappedBy="habitaciones")
 	 */
-	private $reserva;
+	private $reservas;
+	
+	 /*@ManyToMany(targetEntity="User", mappedBy="groups")
+     @ORM\JoinColumn(name="reserva_id", referencedColumnName="id")*/
 
+	public function __construct()
+    {
+        $this->reservas = new ArrayCollection();
+    }
 
     /**
      * Get id
@@ -135,29 +142,6 @@ class Habitacion
     }
 
     /**
-     * Set reserva
-     *
-     * @param \proyecto\HotelBundle\Entity\Reserva $reserva
-     * @return Habitacion
-     */
-    public function setReserva(\proyecto\HotelBundle\Entity\Reserva $reserva = null)
-    {
-        $this->reserva = $reserva;
-
-        return $this;
-    }
-
-    /**
-     * Get reserva
-     *
-     * @return \proyecto\HotelBundle\Entity\Reserva 
-     */
-    public function getReserva()
-    {
-        return $this->reserva;
-    }
-
-    /**
      * Set tipo
      *
      * @param string $tipo
@@ -178,5 +162,38 @@ class Habitacion
     public function getTipo()
     {
         return $this->tipo;
+    }
+
+    /**
+     * Add reservas
+     *
+     * @param \proyecto\HotelBundle\Entity\Reserva $reservas
+     * @return Habitacion
+     */
+    public function addReserva(\proyecto\HotelBundle\Entity\Reserva $reservas)
+    {
+        $this->reservas[] = $reservas;
+
+        return $this;
+    }
+
+    /**
+     * Remove reservas
+     *
+     * @param \proyecto\HotelBundle\Entity\Reserva $reservas
+     */
+    public function removeReserva(\proyecto\HotelBundle\Entity\Reserva $reservas)
+    {
+        $this->reservas->removeElement($reservas);
+    }
+
+    /**
+     * Get reservas
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getReservas()
+    {
+        return $this->reservas;
     }
 }

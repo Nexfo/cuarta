@@ -3,8 +3,8 @@
 {% block titulo %}Reserva: información de cliente{% endblock %}
 
 {% block stylesheets %}
-	<link rel="stylesheet" href="//code.jquery.com/ui/1.10.4/themes/smoothness/jquery-ui.css">
 	{{ parent() }}
+	<link rel="stylesheet" href="{{ asset('bundles/proyectohotel/css/reservas/estilo_reserva_base.css') }}" />
 	<link rel="stylesheet" href="{{ asset('bundles/proyectohotel/css/reservas/estilo_reserva_cliente.css') }}" />
 {% endblock %}
 

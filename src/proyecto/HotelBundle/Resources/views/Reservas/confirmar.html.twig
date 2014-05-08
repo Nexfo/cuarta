@@ -3,8 +3,8 @@
 {% block titulo %}Reserva: confirmar{% endblock %}
 
 {% block stylesheets %}
-	<link rel="stylesheet" href="//code.jquery.com/ui/1.10.4/themes/smoothness/jquery-ui.css">
 	{{ parent() }}
+	<link rel="stylesheet" href="{{ asset('bundles/proyectohotel/css/reservas/estilo_reserva_base.css') }}" />
 	<link rel="stylesheet" href="{{ asset('bundles/proyectohotel/css/reservas/estilo_reserva_confirmar.css') }}" />
 {% endblock %}
 
@@ -26,7 +26,16 @@
 		<h1>Confirmar</h1>
 	</div>
 	<div id="confirmacion">
-		<span>{{ codigo }}</span>
+		{% if error != "" %}
+			<div id="errores">
+				<span>{{ error }}</span>
+			</div>
+		{% endif %}
+		{% if mensaje != "" %}
+			<div id="mensaje">
+				<span>{{ mensaje }}</span>
+			</div>
+		{% endif %}
 	</div>
 {% endblock %}
 

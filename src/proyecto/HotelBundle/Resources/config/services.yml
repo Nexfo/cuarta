@@ -10,3 +10,7 @@ services:
         class: proyecto\HotelBundle\Form\Type\DatePickerType
         tags:
             - { name: form.type, alias: datePicker }
+
+    purgador:
+        class: proyecto\HotelBundle\Controller\PurgaController
+        arguments: [ @doctrine.orm.entity_manager ]

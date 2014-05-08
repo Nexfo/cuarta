@@ -5,7 +5,8 @@
 {% block stylesheets %}
 	<link rel="stylesheet" href="//code.jquery.com/ui/1.10.4/themes/smoothness/jquery-ui.css">
 	{{ parent() }}
-	<link rel="stylesheet" href="{{ asset('bundles/proyectohotel/css/reservas/estilo_reserva.css') }}" />
+	<link rel="stylesheet" href="{{ asset('bundles/proyectohotel/css/reservas/estilo_reserva_base.css') }}" />
+	<link rel="stylesheet" href="{{ asset('bundles/proyectohotel/css/reservas/estilo_reserva_primera.css') }}" />
 {% endblock %}
 
 {% block cabecera %}
@@ -34,10 +35,23 @@
 	<div id="info_reserva">
 		<h1>Información básica</h1>
 		<p>
-			You use the exact same code (without the tags) from your and put it in a .css file. Then, rather than having the tags in the head section of each page, with all the css duplicated, you link to the .css file instead with a simple link tag, like this...
+			Debes finalizar el proceso de reserva en menos de 15 minutos. 
+			Los niños de más de 12 años computan como un adulto más. 
+			Para cualquier duda, <a href="{{ path('contacto') }}">contacta con nosotros</a>.
 		</p>
 	</div>
+	
 	<div id="form_reserva">
+		{% if not form.vars.valid or error != "" %}
+			<div id="errores">
+				{{ form_errors(form.fecha_entrada) }}
+				{{ form_errors(form.fecha_salida) }}
+				{{ form_errors(form.tipo_habitacion) }}
+				{{ form_errors(form.adultos) }}
+				{{ form_errors(form.ninios) }}
+				{{ error }}
+			</div>
+		{% endif %}
 		{{ form_start(form, {'attr': {'novalidate': 'novalidate'}}) }}
 			<div class="fila">
 				<div>

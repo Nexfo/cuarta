@@ -29,7 +29,7 @@ class ReservaMinType extends AbstractType
 				),
 			))
 			->add('ninios', 'choice', array(
-				'label' => 'Niños',
+				'label' => 'Niños (< 12)',
 				'choices'   => array(
 					'0' => '0',
 					'1' => '1',

@@ -15,40 +15,48 @@ class ReservasController extends Controller
 {
     public function primeraAction(Request $request)
     {
+		$this->get('purgador')->purgar();
 		$reserva = new Reserva();
 		
-		$form = $this->createForm(new ReservaMinType(), $reserva);
-		
+		$form = $this->createForm(new ReservaMinType(), $reserva);		
 		$form->handleRequest($request);
+		
+		$error = "";
 		
 		if ($form->isValid()) {
 			$objDoctrine = $this->getDoctrine()->getManager();
-			
-			$reserva->setFechaPreReserva(new \DateTime("now"));
-			
-			$objDoctrine->persist($reserva);
-			$objDoctrine->flush();
-			
-			/* ================================= */
-			$session = $this->get("session");
-
-			$id = self::obtenerIdReserva($reserva);
-			
-			if (is_null($id)) {
-				/* NOTIFICAR ERROR */
-				return $this->render('proyectoHotelBundle:Reservas:primera.html.twig', array('form' => $form->createView()));
-			} else {			
-				$session->set("id_reserva", $id);
-				
-				return $this->redirect($this->generateUrl('pagina_reservas_habitacion'));
+			if ($reserva->getFechaEntrada() > (new \DateTime("now"))) {
+				if ($reserva->getFechaSalida() > $reserva->getFechaEntrada()) {
+					$reserva->setFechaPreReserva(new \DateTime("now"));
+					$objDoctrine->persist($reserva);
+					$objDoctrine->flush();
+					
+					$id = $reserva->getId();
+					
+					if (!is_null($id)) {
+						$this->get("session")->set("id_reserva", $id);
+						
+						return $this->redirect($this->generateUrl('pagina_reservas_habitacion'));
+					} else {			
+						$error = "Ocurrió un error inesperado, vuelve a intentarlo.";
+					}
+				} else {
+					$error = "La fecha de salida debe ser posterior a la fecha de entrada.";
+				}
+			} else {
+				$error = "La fecha de entrada no puede haber pasado.";
 			}
 		}
 		
-		return $this->render('proyectoHotelBundle:Reservas:primera.html.twig', array('form' => $form->createView()));
+		return $this->render('proyectoHotelBundle:Reservas:primera.html.twig',
+			array('form' => $form->createView(),
+			'error' => $error
+		));
     }
 	
 	public function habitacionAction(Request $request)
     {
+		$this->get('purgador')->purgar();
 		$session = $this->get("session");
 		$reserva = null;
 		$objDoctrine = $this->getDoctrine()->getManager();
@@ -63,12 +71,17 @@ class ReservasController extends Controller
 		}
 		/* =========== Fin Reservar las habitaciones ======== */
 		
+		/* =========== Obtener Habitaciones disponibles ===== */
+		$habitaciones = self::obtenerHabitaciones($reserva);
+		$error = "";
+		if (count($habitaciones) == 0) {
+			$error = "No hay habitaciones disponibles para esas fechas.";
+		}
+		/* =========== Fin Obtener Habitaciones disponibles = */
+		
 		/* =========== Actualizar Reserva =================== */
 		$form = $this->createForm(new ReservaMinType(), $reserva);
-		
 		$form->handleRequest($request);
-		
-		$habitaciones = self::obenterHabitaciones($session->get('id_reserva'));
 		
 		if ($form->isValid()) {
 			$reserva->setFechaPreReserva(new \DateTime("now"));
@@ -82,12 +95,14 @@ class ReservasController extends Controller
 		
 		return $this->render('proyectoHotelBundle:Reservas:habitacion.html.twig',
 			array('habitaciones' => $habitaciones,
-				  'form_reserva' => $form->createView()
+				  'form_reserva' => $form->createView(),
+				  'error' => $error
 		));
     }
 	
 	public function clienteAction(Request $request)
     {
+		$this->get('purgador')->purgar();
 		$objDoctrine = $this->getDoctrine()->getManager();
 		$session = $this->get("session");
 		$reserva = null;
@@ -98,19 +113,13 @@ class ReservasController extends Controller
 		
 		if (!is_null($request->get('cliente'))) {
 			if (array_key_exists('volver', $request->get('cliente'))) {
-				$query = $objDoctrine->createQuery(
-					'SELECT h
-					 FROM proyectoHotelBundle:Habitacion h
-					 WHERE h.reserva = :reserva'
-				)->setParameter('reserva', $reserva);
-				
 				$reserva->setFechaPreReserva(new \DateTime("now"));
 				$objDoctrine->persist($reserva);
 				
-				$habitaciones = $query->getResult();
+				$habitaciones = $reserva->getHabitaciones();
 				
 				foreach ($habitaciones as $habitacion) {
-					$objDoctrine->persist($habitacion->setReserva(null));
+					$reserva->removeHabitacione($habitacion);
 				}
 				
 				$objDoctrine->flush();
@@ -139,7 +148,6 @@ class ReservasController extends Controller
 			)->setParameter('email', $cliente->getEmail());
 			$rCliente = $query->getOneOrNullResult();
 			
-			//$reserva->setFechaPreReserva(new \DateTime("now"));
 			$objDoctrine->persist($reserva->setFechaPreReserva(new \DateTime("now")));
 			
 			if (is_null($rCliente)) {
@@ -166,6 +174,7 @@ class ReservasController extends Controller
 	public function finalizarAction(Request $request)
     {
 		$reserva = null;
+		$this->get('purgador')->purgar();
 		$sesion = $this->get("session");
 		$objDoctrine = $this->getDoctrine()->getManager();
 		
@@ -182,7 +191,7 @@ class ReservasController extends Controller
 		$email = \Swift_Message::newInstance()
 			->setContentType("text/html")
 			->setSubject('Confirma tu reserva')
-			->setFrom('symfony2hotel@gmail.com')
+			->setFrom('Hotel Symfony II')
 			->setTo($reserva->getCliente()->getEmail())
 			->setBody(
 				$this->renderView(
@@ -205,8 +214,30 @@ class ReservasController extends Controller
 	
 	public function confirmarAction(Request $request, $codigo)
     {
+		$this->get('purgador')->purgar();
+		$objDoctrine = $this->getDoctrine()->getManager();
+		
+		$query = $objDoctrine->createQuery(
+			'SELECT r
+			 FROM proyectoHotelBundle:Reserva r
+			 WHERE r.uniCod = :codigo AND 
+			 r.confirmada = 0'
+		)->setParameter('codigo', $codigo);
+		
+		$reserva = $query->getOneOrNullResult();
+		$error = ""; $mensaje = "";
+		
+		if (is_null($reserva)) {
+			$error = "Esa reserva ya está confirmada, no existe o ha expirado.";
+		} else {
+			$reserva->setConfirmada(1);
+			$objDoctrine->flush();
+			$mensaje = "Reserva confirmada correctamente.";
+		}
+		
 		return $this->render('proyectoHotelBundle:Reservas:confirmar.html.twig',
-			array('codigo' => $codigo
+			array('mensaje' => $mensaje,
+			'error' => $error
 		));
 	}
 	
@@ -224,11 +255,12 @@ class ReservasController extends Controller
 			$reserva->setFechaPreReserva(new \DateTime("now"));
 			$doctrine->persist($reserva);
 			
-			foreach($idHabitaciones as $idHab) {
+			foreach ($idHabitaciones as $idHab) {
 				$repositorio = $this->getDoctrine()->getRepository('proyectoHotelBundle:Habitacion');
 				$habitacion = $repositorio->find($idHab);
 				
-				$doctrine->persist($habitacion->setReserva($reserva));
+				//$doctrine->persist($habitacion->addReserva($reserva));
+				$doctrine->persist($reserva->addHabitacione($habitacion));
 			}
 			
 			$doctrine->flush();
@@ -238,20 +270,46 @@ class ReservasController extends Controller
 		}
 	}
 	
-	private function obenterHabitaciones($idReserva) {
-		$objDoctrine = $this->getDoctrine()->getManager();
+	private function obtenerHabitaciones($reserva) {
+		$habitaciones = $reserva->getTipoHabitacion()->getHabitaciones();
+		$habitacionesLibres = array();
+		$libre = true;
+		$entrada = $reserva->getFechaEntrada();
+		$salida = $reserva->getFechaSalida();
 		
-		$query = $objDoctrine->createQuery(
-			'SELECT r
-			 FROM proyectoHotelBundle:Reserva r
-			 WHERE r.id = :id'
-		)->setParameter('id', $idReserva);
+		//$error = "";
 		
-		$tipoHabitacion = $query->getOneOrNullResult()->getTipoHabitacion();
+		foreach ($habitaciones as $habitacion) {
+			$libre = true;
+			
+			foreach ($habitacion->getReservas() as $reservaHab) {
+				$entradaHab = $reservaHab->getFechaEntrada();
+				$salidaHab = $reservaHab->getFechaSalida();
+				
+				if (($entrada >= $entradaHab) && ($entrada <= $salidaHab)) {
+					//$error .= 'mal';
+					$libre = false;
+				} else {
+					if (($salida >= $entradaHab) && ($salida <= $salidaHab)) {
+						//$error .= 'mal';
+						$libre = false;
+					}/* else {
+						$error .= 'bien';
+						//$libre = true;
+					}*/
+				}
+			}
+			
+			if ($libre) {
+				array_push($habitacionesLibres, $habitacion);
+			}
+		}
 		
-		return $habitaciones = $tipoHabitacion->getHabitaciones();
+		//$this->get("session")->set("error", $error);
+		
+		return $habitacionesLibres;
 	}
-	
+	/*
 	private function obtenerIdReserva($reserva) {
 		$objDoctrine = $this->getDoctrine()->getManager();
 		
@@ -279,5 +337,5 @@ class ReservasController extends Controller
 		} else {
 			return $reservas->getId();
 		}
-	}
+	}*/
 }

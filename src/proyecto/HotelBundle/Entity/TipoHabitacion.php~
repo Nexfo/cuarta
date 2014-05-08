@@ -30,6 +30,13 @@ class TipoHabitacion
     private $nombre;
 
     /**
+     * @var integer
+     *
+     * @ORM\Column(name="numPlazas", type="integer")
+     */
+    private $numPlazas;
+	
+    /**
      * @ORM\OneToMany(targetEntity="Habitacion", mappedBy="tipo")
      */
 	protected $habitaciones;
@@ -103,5 +110,28 @@ class TipoHabitacion
     public function getHabitaciones()
     {
         return $this->habitaciones;
+    }
+
+    /**
+     * Set numPlazas
+     *
+     * @param integer $numPlazas
+     * @return TipoHabitacion
+     */
+    public function setNumPlazas($numPlazas)
+    {
+        $this->numPlazas = $numPlazas;
+
+        return $this;
+    }
+
+    /**
+     * Get numPlazas
+     *
+     * @return integer 
+     */
+    public function getNumPlazas()
+    {
+        return $this->numPlazas;
     }
 }
