@@ -1,8 +1,9 @@
 {% extends 'proyectoHotelBundle::layout.html.twig' %}
 {% block stylesheets %}
 	<link rel="stylesheet" href="//code.jquery.com/ui/1.10.4/themes/smoothness/jquery-ui.css">
-	{{ parent() }}	
+	{{ parent() }}
 	<link rel="stylesheet" href="{{ asset('bundles/proyectohotel/css/estilo_index.css') }}" />
+	<link rel="stylesheet" href="{{ asset('bundles/proyectohotel/css/estilo_barra_reserva.css') }}" />
 {% endblock %}
 
 {% form_theme form 'proyectoHotelBundle:Form:form_reserva_type.html.twig' %}
@@ -42,6 +43,7 @@
 
 {% block javascripts %}
 	{{ parent() }}
+	<script src="{{ asset('bundles/proyectohotel/js/barra_reservas_index.js') }}"></script>
 	<script src="//code.jquery.com/ui/1.10.4/jquery-ui.js"></script>
 	<script src="//jquery-ui.googlecode.com/svn/tags/1.8.20/ui/i18n/jquery.ui.datepicker-es.js"></script>
 	<script>

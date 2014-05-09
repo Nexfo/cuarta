@@ -39,13 +39,18 @@
 			</div>
 		{% else %}
 			<form method="POST" action="">
-				{% for habitacion in habitaciones%}
+				{% for habitacion in habitaciones %}
 					<div id="habitacion">
 						<div id="imagen">
 							<img src="{{ asset('bundles/proyectohotel/imgs/' ~ habitacion.imagen) }}" />
 						</div>
 						<div id="descripcion">
 							<h1>{{ habitacion.nombre }}</h1>
+							<ul>
+								{% for caracteristica in habitacion.caracteristicas %}
+									<li>{{ caracteristica.nombre }}</li>
+								{% endfor %}
+							</ul>
 							<div id="seleccion">
 								<span id="precio">{{ habitacion.precio }} €</span>
 								Seleccionar <input type="checkbox" value="{{ habitacion.id }}" id="checkboxFive" name="habitacion[]" />

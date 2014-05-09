@@ -1,0 +1,133 @@
+{% extends 'proyectoHotelBundle::layout.html.twig' %}
+
+{% block titulo %}
+	{% if titulo != "" %}
+		{{ titulo }}
+	{% else %}
+		Habitaciones
+	{% endif %}
+{% endblock %}
+
+{% block stylesheets %}
+	<link rel="stylesheet" href="//code.jquery.com/ui/1.10.4/themes/smoothness/jquery-ui.css">
+	{{ parent() }}
+	<link rel="stylesheet" href="{{ asset('bundles/proyectohotel/css/estilo_pantallas_base.css') }}" />
+	<link rel="stylesheet" href="{{ asset('bundles/proyectohotel/css/habitaciones/estilo_habitaciones.css') }}" />
+{% endblock %}
+
+{% block cabecera %}
+	<div id="cabecera">
+		<div id="slogans">
+			<div id="c_s_1">
+				<div id="s_1">Habitaciones</div>
+				<div id="bg_s_1"> </div>
+			</div>
+		</div>
+	</div>
+{% endblock %}
+
+{% block banner_reserva %}{% endblock %}
+
+{% block contenido %}
+	<div id="proceso_reserva">
+		<ul>
+			{% for tipo in tipos %}
+				{% if tipo.slug == tipoSlug %}
+					<li class="activo">{{ tipo.nombrePlural }}
+				{% else %}
+					<li><a href="{{ path("pagina_habitaciones", {"tipo": tipo.slug}) }}">{{ tipo.nombrePlural }}</a>
+				{% endif %}
+				</li>
+			{% endfor %}
+		</ul>
+	</div>
+	<div id="contenido">
+		<div id="info">
+			{% if habitaciones is not empty %}
+				{% for habitacion in habitaciones %}
+					<div id="habitacion">
+						<div id="imagen">
+							<img src="{{ asset('bundles/proyectohotel/imgs/' ~ habitacion.imagen) }}" />
+						</div>
+						<div id="descripcion">
+							<h1>{{ habitacion.nombre }}</h1>
+							<ul>
+								{% for caracteristica in habitacion.caracteristicas %}
+									<li>{{ caracteristica.nombre }}</li>
+								{% endfor %}
+							</ul>
+						</div>
+					</div>
+				{% endfor %}
+			{% else %}
+				<div class="callbacks_container">
+					<ul class="rslides" id="slider4">
+						{% for habFoto in habitacionesFotos %}
+							<li>
+								<img src="{{ asset('bundles/proyectohotel/imgs/' ~ habFoto.imagen) }}" />
+								<p class="caption">{{ habFoto.nombre }}</p>
+							</li>
+						{% endfor %}
+					</ul>
+				</div>
+			{% endif %}
+		</div>
+		<div id="formulario_reserva">
+			<h1>Hacer reserva</h1>
+			{% form_theme form_reserva 'proyectoHotelBundle:Form:form_reserva_type.html.twig' %}
+			{{ form_start(form_reserva, {'attr': {'novalidate': 'novalidate'}}) }}
+				<div class="horiz">
+					<span>{{ form_label(form_reserva.fecha_entrada) }}</span><br/>
+					{{ form_widget(form_reserva.fecha_entrada) }}
+				</div>
+				
+				<div class="horiz">
+					<span>{{ form_label(form_reserva.fecha_salida) }}</span><br/>
+					{{ form_widget(form_reserva.fecha_salida) }}
+				</div>
+
+				<div class="horiz">
+					<span>{{ form_label(form_reserva.tipo_habitacion) }}</span><br/>
+					{{ form_widget(form_reserva.tipo_habitacion) }}
+				</div>
+				
+				<div class="column">
+					<span>{{ form_label(form_reserva.adultos) }}</span><br/>
+					{{ form_widget(form_reserva.adultos) }}
+				</div>
+				
+				<div class="column2">
+					<span>{{ form_label(form_reserva.ninios) }}</span><br/>
+					{{ form_widget(form_reserva.ninios) }}
+				</div>
+				
+				<div class="boton clear">
+					{{ form_widget(form_reserva.reservar) }}
+				</div>
+			{{ form_end(form_reserva) }}
+		</div>
+		<div class="clear"></div>
+	</div>
+{% endblock %}
+
+{% block javascripts %}
+	<script src="{{ asset('bundles/proyectohotel/js/jquery-1.11.0.min.js') }}"></script>
+	<script src="//code.jquery.com/ui/1.10.4/jquery-ui.js"></script>
+	<script src="//jquery-ui.googlecode.com/svn/tags/1.8.20/ui/i18n/jquery.ui.datepicker-es.js"></script>
+	<script src="{{ asset('bundles/proyectohotel/js/responsiveslides.min.js') }}"></script>
+	<script>
+		global = {
+			locale: '{{ app.request.locale }}'
+		}
+		$(window).load(function() {
+			$(".rslides").responsiveSlides({
+				auto: false,
+				pager: false,
+				nav: true,
+				speed: 500,
+				namespace: "callbacks",
+			});
+		});
+	</script>
+	<script src="{{ asset('bundles/proyectohotel/js/file.js') }}"></script>
+{% endblock %}

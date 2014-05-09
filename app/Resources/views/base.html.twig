@@ -16,10 +16,10 @@
 				<div id="logotipo"><h1><a href="{{ path('pagina_principal') }}">Hotel Symfony II</a></h1></div>
 				<div id="opciones">
 					<ul>
-						<li>Hotel</li>
-						<li>Habitaciones & Suites</li>
+						<li><a href="{{ path('pagina_principal') }}">Inicio</a></li>
+						<li><a href="{{ path('pagina_hotel') }}">Hotel</a></li>
+						<li><a href="{{ path('pagina_habitaciones') }}">Habitaciones & Suites</a></li>
 						<li><a href="{{ path('pagina_reservas') }}">Reservas</a></li>
-						<li>Actividades</li>
 						<li><a href="{{ path('contacto') }}">Contacto</a></li>
 					</ul>
 				</div>
@@ -62,27 +62,14 @@
 					<ul>
 						<li><a href="{{ path('contacto') }}">Contacto</a></li>
 						<li><a href="{{ path('pagina_reservas') }}">Reservas</a></li>
-						<li>Habitaciones & Suites</li>
-						<li>Hotel</li>
+						<li><a href="{{ path('pagina_habitaciones') }}">Habitaciones & Suites</a></li>
+						<li><a href="{{ path('pagina_hotel') }}">Hotel</a></li>
 					</ul>
 				</div>
 			</div>
 		</div>
         {% block javascripts %}
 			<script src="{{ asset('bundles/proyectohotel/js/jquery-1.11.0.min.js') }}"></script>
-			<script>
-				$(window).load(function(){
-					$(window).scroll(function () {
-						if ($(this).scrollTop() > 325) {
-							$('#reserva').css({"position": "fixed", "width": "980px", "top": "100px"});
-							$('#cabecera').css("margin-bottom", "145px");
-						} else {
-							$('#reserva').css({"position": "relative", "width": "100%", "top": ""});
-							$('#cabecera').css("margin-bottom", "0px");
-						}
-					});
-				});
-			</script>
 		{% endblock %}
     </body>
 </html>

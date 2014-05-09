@@ -1,0 +1,13 @@
+#form_contacto {width: 563px;margin: 25px auto;}
+
+.tercio {float: left; width: 33%;margin-bottom: 20px;}
+.mensaje {width: 99%; clear:both;margin-bottom: 20px;}
+.boton {float:right;margin-bottom: 30px;margin-right: 24px;}
+
+#form_contacto input, #form_contacto button, #form_contacto textarea {margin-top: 10px;font-size: 13px;color: #888;padding:10px;}
+#form_contacto textarea {width: 517px;height: 200px;}
+#form_contacto button[type="submit"] {width: 200px; padding: 10px; color: white;border:0px;border-bottom: 1px solid rgba(100,100,100,0.60);background: #32a2e3;}
+#form_contacto button[type="submit"]:active {background: #3268e3;}
+
+#mensaje {margin-bottom: 20px;background: rgba(50,162,227, 0.1);border: 1px solid #32a2e3;border-radius: 5px;color: #32a2e3;padding: 15px 25px;text-align:center;}
+#errores {background: #FF8080;border: 1px solid #FF0000;color: #FF0000;padding: 15px;margin-bottom: 20px;}

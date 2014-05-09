@@ -1,0 +1,101 @@
+{% extends 'proyectoHotelBundle::layout.html.twig' %}
+
+{% block titulo %}Contacto{% endblock %}
+
+{% block stylesheets %}
+	<link rel="stylesheet" href="//code.jquery.com/ui/1.10.4/themes/smoothness/jquery-ui.css">
+	{{ parent() }}
+	<link rel="stylesheet" href="{{ asset('bundles/proyectohotel/css/estilo_pantallas_base.css') }}" />
+	<link rel="stylesheet" href="{{ asset('bundles/proyectohotel/css/estilo_barra_reserva.css') }}" />
+	<link rel="stylesheet" href="{{ asset('bundles/proyectohotel/css/estilo_contacto.css') }}" />
+{% endblock %}
+
+{% block cabecera %}
+	<div id="cabecera">
+		<div id="slogans">
+			<div id="c_s_1">
+				<div id="s_1">Contacto</div>
+				<div id="bg_s_1"> </div>
+			</div>
+		</div>
+	</div>
+{% endblock %}
+
+{% form_theme formRserv 'proyectoHotelBundle:Form:form_reserva_type.html.twig' %}
+{% block form_reserva_simple %}
+	{{ form_start(formRserv, {'attr': {'novalidate': 'novalidate'}}) }}
+		<div>
+			<span>{{ form_label(formRserv.tipo_habitacion) }}</span><br/>
+			{{ form_widget(formRserv.tipo_habitacion) }}
+		</div>
+		
+		<div>
+			<span>{{ form_label(formRserv.fecha_entrada) }}</span><br/>
+			{{ form_widget(formRserv.fecha_entrada) }}
+		</div>
+		
+		<div>
+			<span>{{ form_label(formRserv.fecha_salida) }}</span><br/>
+			{{ form_widget(formRserv.fecha_salida) }}
+		</div>
+		
+		<div>
+			<span>{{ form_label(formRserv.adultos) }}</span><br/>
+			{{ form_widget(formRserv.adultos) }}
+		</div>
+		
+		<div>
+			<span>{{ form_label(formRserv.ninios, 'Niños') }}</span><br/>
+			{{ form_widget(formRserv.ninios) }}
+		</div>
+		
+		<div>
+			<span>&nbsp</span><br/>
+			{{ form_widget(formRserv.reservar) }}
+		</div>
+	{{ form_end(formRserv) }}
+{% endblock %}
+
+{% block contenido %}
+	<div id="form_contacto">
+		{{ form_start(form) }}
+			<div class="tercio">
+				<span>{{ form_label(form.nombre) }}</span><br/>
+				{{ form_widget(form.nombre) }}
+			</div>
+		
+			<div class="tercio">
+				<span>{{ form_label(form.email) }}</span><br/>
+				{{ form_widget(form.email) }}
+			</div>
+			
+			<div class="tercio">
+				<span>{{ form_label(form.asunto) }}</span><br/>
+				{{ form_widget(form.asunto) }}
+			</div>
+			
+			<div class="mensaje">
+				<span>{{ form_label(form.mensaje) }}</span><br/>
+				{{ form_widget(form.mensaje) }}
+			</div>
+
+			<div class="boton">
+				{{ form_widget(form.enviar) }}
+			</div>
+		{{ form_end(form) }}
+	</div>
+	<div class="clear"></div>
+{% endblock %}
+
+{% block javascripts %}
+	{{ parent() }}
+	<script src="{{ asset('bundles/proyectohotel/js/barra_reservas_resto.js') }}"></script>
+	<script src="//code.jquery.com/ui/1.10.4/jquery-ui.js"></script>
+	<script src="//jquery-ui.googlecode.com/svn/tags/1.8.20/ui/i18n/jquery.ui.datepicker-es.js"></script>
+	<script>
+		global = {
+			locale: '{{ app.request.locale }}'
+		}
+	</script>
+	<script src="{{ asset('bundles/proyectohotel/js/file.js') }}"></script>
+{% endblock %}

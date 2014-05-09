@@ -6,12 +6,12 @@ use Doctrine\ORM\Mapping as ORM;
 use Doctrine\Common\Collections\ArrayCollection;
 
 /**
- * TipoHabitacion
+ * CaracteristicaHabitacion
  *
  * @ORM\Table()
  * @ORM\Entity
  */
-class TipoHabitacion
+class CaracteristicaHabitacion
 {
     /**
      * @var integer
@@ -28,32 +28,11 @@ class TipoHabitacion
      * @ORM\Column(name="nombre", type="string", length=255)
      */
     private $nombre;
-	
-    /**
-     * @var string
-     *
-     * @ORM\Column(name="nombrePlural", type="string", length=255)
-     */
-    private $nombrePlural;
 
-    /**
-     * @var integer
-     *
-     * @ORM\Column(name="numPlazas", type="integer")
-     */
-    private $numPlazas;
-	
-    /**
-     * @var string
-     *
-     * @ORM\Column(name="slug", type="string")
-     */
-    private $slug;
-	
-    /**
-     * @ORM\OneToMany(targetEntity="Habitacion", mappedBy="tipo")
-     */
-	protected $habitaciones;
+	/**
+     * @ORM\ManyToMany(targetEntity="Habitacion", mappedBy="caracteristicas")
+	 */
+	private $habitaciones;
 
     public function __construct()
     {
@@ -74,7 +53,7 @@ class TipoHabitacion
      * Set nombre
      *
      * @param string $nombre
-     * @return TipoHabitacion
+     * @return CaracteristicaHabitacion
      */
     public function setNombre($nombre)
     {
@@ -97,7 +76,7 @@ class TipoHabitacion
      * Add habitaciones
      *
      * @param \proyecto\HotelBundle\Entity\Habitacion $habitaciones
-     * @return TipoHabitacion
+     * @return CaracteristicaHabitacion
      */
     public function addHabitacione(\proyecto\HotelBundle\Entity\Habitacion $habitaciones)
     {
@@ -124,74 +103,5 @@ class TipoHabitacion
     public function getHabitaciones()
     {
         return $this->habitaciones;
-    }
-
-    /**
-     * Set numPlazas
-     *
-     * @param integer $numPlazas
-     * @return TipoHabitacion
-     */
-    public function setNumPlazas($numPlazas)
-    {
-        $this->numPlazas = $numPlazas;
-
-        return $this;
-    }
-
-    /**
-     * Get numPlazas
-     *
-     * @return integer 
-     */
-    public function getNumPlazas()
-    {
-        return $this->numPlazas;
-    }
-
-    /**
-     * Set slug
-     *
-     * @param string $slug
-     * @return TipoHabitacion
-     */
-    public function setSlug($slug)
-    {
-        $this->slug = $slug;
-
-        return $this;
-    }
-
-    /**
-     * Get slug
-     *
-     * @return string 
-     */
-    public function getSlug()
-    {
-        return $this->slug;
-    }
-
-    /**
-     * Set nombrePlural
-     *
-     * @param string $nombrePlural
-     * @return TipoHabitacion
-     */
-    public function setNombrePlural($nombrePlural)
-    {
-        $this->nombrePlural = $nombrePlural;
-
-        return $this;
-    }
-
-    /**
-     * Get nombrePlural
-     *
-     * @return string 
-     */
-    public function getNombrePlural()
-    {
-        return $this->nombrePlural;
     }
 }

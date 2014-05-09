@@ -1,0 +1,26 @@
+#fondo {position: absolute;height:260px; width: 100%; background: silver url('../imgs/bg_reserv.jpg') no-repeat center 10%;z-index:-100;}
+
+#cabecera {height: 260px; width: 100%;position: relative;margin-bottom: 15px;}
+#cabecera #slogans {position: absolute;bottom:0px;color: white;z-index:-100;overflow:hidden;}
+
+#s_1, #bg_s_1{display:inline-block;float:left;padding: 7px 14px;}
+#s_1 {text-transform:uppercase;}
+#bg_s_1{opacity: 0.8;width: 10px;}
+
+#s_1 {background: rgba(50,162,227,0.8);font-size: 19px;font-weight:bold;}
+#bg_s_1 {background: transparent url("../imgs/bg_blue.png") no-repeat;height: 19px;}
+
+#informacion {width: 100%;}
+#proceso_reserva {box-shadow: 0px 4px 10px #ccc;background:white;text-align:center;height: 50px;border-top: 1px solid;border-bottom: 1px solid; border-color: rgba(100,100,100,0.40);}
+#proceso_reserva ul {margin-top: 17px;list-style: none;}
+#proceso_reserva ul li {display:inline;margin-left: 30px;color: silver;}
+#proceso_reserva ul li:first-child {margin: 0px;}
+#proceso_reserva ul li div{z-index: auto;width:30px;height:30px;border-radius:50px;color:#fff;text-align:center;background:silver;margin-right: 6px;display:inline-block;position:relative;top:-6px;}
+#proceso_reserva ul li div span {position:relative;top:6px}
+
+#proceso_reserva ul li.activo {color:#000;}
+#proceso_reserva ul li.activo div {color:#fff;background:#32a2e3;}
+
+#info_reserva {padding-bottom: 5px;padding-top: 30px;width: 563px;margin: 0px auto;border-bottom: 1px dashed rgba(100,100,100,0.40);}
+#info_reserva  h1 {color: #444;font-size: 21px;margin-bottom: 20px;}
+#info_reserva  p {color: #888;font-size: 13px;margin-bottom: 20px;line-height:15px;}

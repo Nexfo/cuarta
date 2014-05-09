@@ -54,12 +54,17 @@ class Habitacion
 	 */
 	private $reservas;
 	
-	 /*@ManyToMany(targetEntity="User", mappedBy="groups")
-     @ORM\JoinColumn(name="reserva_id", referencedColumnName="id")*/
+	/**
+     * @ORM\ManyToMany(targetEntity="CaracteristicaHabitacion", inversedBy="habitaciones")
+     * @ORM\JoinTable(name="caracteristicas_habitaciones")
+	 * @ORM\OrderBy({"nombre" = "ASC"})
+     **/
+	private $caracteristicas;
 
 	public function __construct()
     {
         $this->reservas = new ArrayCollection();
+		$this->caracteristicas = new ArrayCollection();
     }
 
     /**
@@ -195,5 +200,38 @@ class Habitacion
     public function getReservas()
     {
         return $this->reservas;
+    }
+
+    /**
+     * Add caracteristicas
+     *
+     * @param \proyecto\HotelBundle\Entity\CaracteristicaHabitacion $caracteristicas
+     * @return Habitacion
+     */
+    public function addCaracteristica(\proyecto\HotelBundle\Entity\CaracteristicaHabitacion $caracteristicas)
+    {
+        $this->caracteristicas[] = $caracteristicas;
+
+        return $this;
+    }
+
+    /**
+     * Remove caracteristicas
+     *
+     * @param \proyecto\HotelBundle\Entity\CaracteristicaHabitacion $caracteristicas
+     */
+    public function removeCaracteristica(\proyecto\HotelBundle\Entity\CaracteristicaHabitacion $caracteristicas)
+    {
+        $this->caracteristicas->removeElement($caracteristicas);
+    }
+
+    /**
+     * Get caracteristicas
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getCaracteristicas()
+    {
+        return $this->caracteristicas;
     }
 }

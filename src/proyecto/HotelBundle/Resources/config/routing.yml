@@ -32,3 +32,10 @@ procesar_contacto:
     defaults: { _controller: proyectoHotelBundle:Contacto:procesar }
     methods:  [POST]
 
+pagina_habitaciones:
+    pattern: /habitaciones/{tipo}
+    defaults: { _controller: proyectoHotelBundle:Habitaciones:mostrar, tipo: "" }
+
+pagina_hotel:
+    pattern: /hotel
+    defaults: { _controller: proyectoHotelBundle:Hotel:mostrar }

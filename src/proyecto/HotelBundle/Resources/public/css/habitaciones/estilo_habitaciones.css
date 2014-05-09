@@ -1,0 +1,45 @@
+#cabecera {margin-bottom: 0px;}
+
+#proceso_reserva ul li a {font-weight:normal; color: #888;}
+#proceso_reserva ul li a:hover {color: #666;text-decoration: none}
+#proceso_reserva ul li a:active {color: #32A2E3;text-decoration: none}
+#proceso_reserva ul li.activo {font-weight:bold; color: #32A2E3;}
+
+#contenido {width: 100%;}
+#info {margin-bottom: 25px;margin-top: 25px; padding: 0px 25px;float: left;width: 640px; border-right: 1px solid rgba(100,100,100,0.40);}
+
+#habitaciones {margin-top: 25px;float:left;width: 670px;margin-bottom: 25px;border-right: 1px solid rgba(100,100,100,0.40);}
+#habitacion {height: 200px; width: 625px; background:white; border: 1px solid rgba(100,100,100,0.40);margin-bottom: 25px;}
+#imagen {float:left;height: 200px; width: 191px; border-right: 1px solid rgba(100,100,100,0.40);}
+#imagen img {width: 100%; height: 100%;}
+#descripcion {float:left;height: 150px;width: 375px;padding: 25px;}
+#descripcion h1 {color: rgba(0,0,0,0.85); font-weight:bold;}
+#descripcion ul {margin: 7px auto;columns: 2;-webkit-columns: 2;-moz-columns: 2;}
+#descripcion ul li {color: #888;font-size: 13px;line-height:15px;width: 160px;margin-bottom: 3px;}
+
+#formulario_reserva {margin-bottom: 25px;float:right; width: 250px;margin-top: 25px; padding-bottom: 50px;}
+#formulario_reserva input, #formulario_reserva select, #formulario_reserva button {margin-top: 10px;font-size: 13px;color: #888;padding:10px;}
+.horiz input {width: 220px;}
+.horiz select {width: 243px;}
+.column {float: left; width: 100px;margin-right: 20px;}
+.column2 {float: right;padding-right: 6px;}
+.column select, .column2 select {width: 115px;}
+#formulario_reserva .boton {width: 250px;display: block;padding-top: 10px;}
+#formulario_reserva button[type="submit"] {width: 243px; color: white;border:0px;border-bottom: 1px solid rgba(100,100,100,0.60);background: #32a2e3;}
+#formulario_reserva button[type="submit"]:active {background: #3268e3;}
+#formulario_reserva form span {color: #888; font-weight:bold;font-size: 13px;}
+#formulario_reserva form div {margin-top: 15px;}
+#formulario_reserva h1 {color: rgba(0,0,0,0.85); font-weight:bold;}
+
+.rslides {position: relative;list-style: none;overflow: hidden;width: 100%;padding: 0;margin: 0;}
+.rslides li {-webkit-backface-visibility: hidden;position: absolute;display: none;width: 100%;left: 0;top: 0;}
+.rslides li:first-child {position: relative;display: block;float: left;}
+.rslides img {display: block;height: auto;float: left;width: 100%;border: 0;} 
+.callbacks_container {margin-bottom: 50px;position: relative;float: left;width: 100%;}
+.callbacks {position: relative;list-style: none;overflow: hidden;width: 100%;padding: 0;margin: 0;}
+.callbacks li {position: absolute;width: 100%;left: 0;top: 0;}
+.callbacks img {display: block;position: relative;z-index: 1;height: auto;width: 100%;border: 0;}
+.callbacks .caption {display: block;position: absolute;z-index: 2;font-size: 20px;text-shadow: none;color: #fff;background: #000;background: rgba(0,0,0, .8);left: 0;right: 0;bottom: 0;padding: 10px 20px;margin: 0;max-width: none;}
+.callbacks_nav {position: absolute;-webkit-tap-highlight-color: rgba(0,0,0,0);top: 52%;left: 0;opacity: 0.7;z-index: 3;text-indent: -9999px;overflow: hidden;text-decoration: none;height: 61px;width: 38px;background: transparent url("../../imgs/themes.gif") no-repeat left top;margin-top: -45px;}
+.callbacks_nav:active {opacity: 0.85;}
+.callbacks_nav.next { left: auto;background-position: right top;right: 0;}

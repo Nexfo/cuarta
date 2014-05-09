@@ -9,7 +9,6 @@ use proyecto\HotelBundle\Form\Type\ClienteType;
 use proyecto\HotelBundle\Entity\Cliente;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Session;
-use Symfony\Component\Form\FormError;
 
 class ReservasController extends Controller
 {
@@ -191,7 +190,7 @@ class ReservasController extends Controller
 		$email = \Swift_Message::newInstance()
 			->setContentType("text/html")
 			->setSubject('Confirma tu reserva')
-			->setFrom('Hotel Symfony II')
+			->setFrom('symfony2hotel@gmail.com')
 			->setTo($reserva->getCliente()->getEmail())
 			->setBody(
 				$this->renderView(
@@ -309,33 +308,4 @@ class ReservasController extends Controller
 		
 		return $habitacionesLibres;
 	}
-	/*
-	private function obtenerIdReserva($reserva) {
-		$objDoctrine = $this->getDoctrine()->getManager();
-		
-		$query = $objDoctrine->createQuery(
-			'SELECT r
-			   FROM proyectoHotelBundle:Reserva r
-			  WHERE r.adultos = :adultos AND 
-				r.ninios = :ninios AND 
-				r.fecha_entrada = :entrada AND 
-				r.fecha_salida = :salida AND 
-				r.fecha_pre_reserva = :reserva AND 
-				r.confirmada = 0 AND 
-				r.tipo_habitacion = :tipo'
-		)->setParameter('adultos', $reserva->getAdultos())
-		->setParameter('ninios', $reserva->getNinios())
-		->setParameter('entrada', $reserva->getFechaEntrada())
-		->setParameter('salida', $reserva->getFechaSalida())
-		->setParameter('reserva', $reserva->getFechaPreReserva())
-		->setParameter('tipo', $reserva->getTipoHabitacion());
-		 
-		$reservas = $query->getOneOrNullResult();
-		
-		if (is_null($reservas)) {
-			return null;
-		} else {
-			return $reservas->getId();
-		}
-	}*/
 }
