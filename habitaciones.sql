@@ -1,6 +1,6 @@
 insert into tipohabitacion (id, nombre, nombrePlural, numPlazas, slug) values (1, 'Habitación individual', 'Habitaciones individuales', 1, 'habitaciones-individuales');
-insert into tipohabitacion (id, nombre, nombrePlural, numPlazas, slug) values (2, 'Habitación doble', 2, 'Habitaciones dobles', 'habitaciones-dobles');
-insert into tipohabitacion (id, nombre, nombrePlural, numPlazas, slug) values (1, 'Habitación suite', 2, 'Habitaciones suites', 'suites');
+insert into tipohabitacion (id, nombre, nombrePlural, numPlazas, slug) values (2, 'Habitación doble', 'Habitaciones dobles', 2, 'habitaciones-dobles');
+insert into tipohabitacion (id, nombre, nombrePlural, numPlazas, slug) values (3, 'Habitación suite', 'Habitaciones suites', 2, 'suites');
 
 /* ============================================================================================================ */
 

@@ -14,3 +14,10 @@ services:
     purgador:
         class: proyecto\HotelBundle\Controller\PurgaController
         arguments: [ @doctrine.orm.entity_manager ]
+
+    kernel.listener.hotelException:
+        class: proyecto\HotelBundle\EventListener\HotelExceptionListener
+        arguments:
+            - @twig
+        tags:
+            - { name: kernel.event_listener, event: kernel.exception, method: onKernelException }

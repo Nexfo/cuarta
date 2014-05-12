@@ -3,7 +3,7 @@
 {% block titulo %}Reserva: seleccionar habitación{% endblock %}
 
 {% block stylesheets %}
-	<link rel="stylesheet" href="//code.jquery.com/ui/1.10.4/themes/smoothness/jquery-ui.css">
+	<link rel="stylesheet" href="{{ asset('bundles/proyectohotel/css/jquery-ui.css') }}">
 	{{ parent() }}
 	<link rel="stylesheet" href="{{ asset('bundles/proyectohotel/css/reservas/estilo_reserva_base.css') }}" />
 	<link rel="stylesheet" href="{{ asset('bundles/proyectohotel/css/reservas/estilo_reserva_habitacion.css') }}" />
@@ -94,7 +94,7 @@
 			</div>
 			
 			<div class="boton clear">
-				{{ form_widget(form_reserva.reservar) }}
+				{{ form_widget(form_reserva.reservar, { 'label': 'Actualizar' }) }}
 			</div>
 		{{ form_end(form_reserva) }}
 	</div>
@@ -105,8 +105,8 @@
 
 {% block javascripts %}
 	<script src="{{ asset('bundles/proyectohotel/js/jquery-1.11.0.min.js') }}"></script>
-	<script src="//code.jquery.com/ui/1.10.4/jquery-ui.js"></script>
-	<script src="//jquery-ui.googlecode.com/svn/tags/1.8.20/ui/i18n/jquery.ui.datepicker-es.js"></script>
+	<script src="{{ asset('bundles/proyectohotel/js/jquery-ui.js') }}"></script>
+	<script src="{{ asset('bundles/proyectohotel/js/jquery.ui.datepicker-es.js') }}"></script>
 	<script>
 		global = {
 			locale: '{{ app.request.locale }}'

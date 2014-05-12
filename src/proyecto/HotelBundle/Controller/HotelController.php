@@ -17,7 +17,7 @@ class HotelController extends Controller
 		));
 		
 		return $this->render('proyectoHotelBundle:Hotel:hotel.html.twig',
-			array('formRserv' => $formReserv->createView()
+			array('formReserva' => $formReserv->createView()
 		));
     }
 }

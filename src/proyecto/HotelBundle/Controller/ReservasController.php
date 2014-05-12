@@ -15,7 +15,12 @@ class ReservasController extends Controller
     public function primeraAction(Request $request)
     {
 		$this->get('purgador')->purgar();
-		$reserva = new Reserva();
+		$session = $this->get("session");
+		$reserva = null;
+		
+		if (!($reserva = self::cargarReserva($session))) {
+			$reserva = new Reserva();
+		}
 		
 		$form = $this->createForm(new ReservaMinType(), $reserva);		
 		$form->handleRequest($request);
@@ -30,10 +35,8 @@ class ReservasController extends Controller
 					$objDoctrine->persist($reserva);
 					$objDoctrine->flush();
 					
-					$id = $reserva->getId();
-					
-					if (!is_null($id)) {
-						$this->get("session")->set("id_reserva", $id);
+					if (!is_null($reserva->getId())) {
+						$this->get("session")->set("id_reserva", $reserva->getId());
 						
 						return $this->redirect($this->generateUrl('pagina_reservas_habitacion'));
 					} else {			
@@ -64,33 +67,28 @@ class ReservasController extends Controller
 			return $this->redirect($this->generateUrl('pagina_reservas'));
 		}
 		
-		/* =========== Reservar las habitaciones ============ */
-		if (self::reservarHabitaciones($this->get('request')->request->get('habitacion'), $objDoctrine, $reserva)) {
-			return $this->redirect($this->generateUrl('pagina_reservas_cliente'));
-		}
-		/* =========== Fin Reservar las habitaciones ======== */
-		
-		/* =========== Obtener Habitaciones disponibles ===== */
-		$habitaciones = self::obtenerHabitaciones($reserva);
 		$error = "";
+		
+		if (!is_null($this->get('request')->request->get('habitacion'))) {
+			if ($reserva->getAdultos() > ($reserva->getTipoHabitacion()->getNumPlazas() * count($this->get('request')->request->get('habitacion')))) {
+				$error = "Debes seleccionar al menos " .
+						 round($reserva->getAdultos() / $reserva->getTipoHabitacion()->getNumPlazas()) . " " .
+						 strtolower($reserva->getTipoHabitacion()->getNombrePlural()) . ".";
+			} else {
+				if (self::reservarHabitaciones($this->get('request')->request->get('habitacion'), $objDoctrine, $reserva)) {
+					return $this->redirect($this->generateUrl('pagina_reservas_cliente'));
+				}
+			}
+		}
+		
+		$habitaciones = self::obtenerHabitaciones($reserva);
 		if (count($habitaciones) == 0) {
 			$error = "No hay habitaciones disponibles para esas fechas.";
 		}
-		/* =========== Fin Obtener Habitaciones disponibles = */
 		
-		/* =========== Actualizar Reserva =================== */
-		$form = $this->createForm(new ReservaMinType(), $reserva);
-		$form->handleRequest($request);
-		
-		if ($form->isValid()) {
-			$reserva->setFechaPreReserva(new \DateTime("now"));
-			
-			$objDoctrine->persist($reserva);
-			$objDoctrine->flush();
-			
-			return $this->redirect($this->generateUrl('pagina_reservas_habitacion'));
-		}
-		/* =========== Fin Actualizar Reserva =============== */
+		$form = $this->createForm(new ReservaMinType(), $reserva, array(
+			'action' => $this->generateUrl('pagina_reservas')
+		));
 		
 		return $this->render('proyectoHotelBundle:Reservas:habitacion.html.twig',
 			array('habitaciones' => $habitaciones,
@@ -258,7 +256,6 @@ class ReservasController extends Controller
 				$repositorio = $this->getDoctrine()->getRepository('proyectoHotelBundle:Habitacion');
 				$habitacion = $repositorio->find($idHab);
 				
-				//$doctrine->persist($habitacion->addReserva($reserva));
 				$doctrine->persist($reserva->addHabitacione($habitacion));
 			}
 			
@@ -276,8 +273,6 @@ class ReservasController extends Controller
 		$entrada = $reserva->getFechaEntrada();
 		$salida = $reserva->getFechaSalida();
 		
-		//$error = "";
-		
 		foreach ($habitaciones as $habitacion) {
 			$libre = true;
 			
@@ -286,16 +281,11 @@ class ReservasController extends Controller
 				$salidaHab = $reservaHab->getFechaSalida();
 				
 				if (($entrada >= $entradaHab) && ($entrada <= $salidaHab)) {
-					//$error .= 'mal';
 					$libre = false;
 				} else {
 					if (($salida >= $entradaHab) && ($salida <= $salidaHab)) {
-						//$error .= 'mal';
 						$libre = false;
-					}/* else {
-						$error .= 'bien';
-						//$libre = true;
-					}*/
+					}
 				}
 			}
 			
@@ -303,8 +293,6 @@ class ReservasController extends Controller
 				array_push($habitacionesLibres, $habitacion);
 			}
 		}
-		
-		//$this->get("session")->set("error", $error);
 		
 		return $habitacionesLibres;
 	}
