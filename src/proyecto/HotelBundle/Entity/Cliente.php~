@@ -39,9 +39,9 @@ class Cliente
 	/**
 	 * @var string
 	 * 
-	 * @ORM\Column(name="segundo_apellido", type="string", nullable=true)
+	 * @ORM\Column(name="dni", type="string", length=9, unique=true)
 	 */
-	private $segundoApellido;
+	private $dni;
 	
 	/**
 	 * @var string

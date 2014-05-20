@@ -40,7 +40,7 @@
 			Para cualquier duda, <a href="{{ path('contacto') }}">contacta con nosotros</a>.
 		</p>
 	</div>
-	
+
 	<div id="form_reserva">
 		{% if not form.vars.valid or error != "" %}
 			<div id="errores">
@@ -58,7 +58,7 @@
 					<span>{{ form_label(form.fecha_entrada) }}</span><br/>
 					{{ form_widget(form.fecha_entrada) }}
 				</div>
-				
+
 				<div>
 					<span>{{ form_label(form.fecha_salida) }}</span><br/>
 					{{ form_widget(form.fecha_salida) }}
@@ -70,18 +70,18 @@
 					<span>{{ form_label(form.tipo_habitacion) }}</span><br/>
 					{{ form_widget(form.tipo_habitacion) }}
 				</div>
-				
+
 				<div id="adultos">
 					<span>{{ form_label(form.adultos) }}</span><br/>
 					{{ form_widget(form.adultos) }}
 				</div>
-				
+
 				<div id="ninios">
 					<span>{{ form_label(form.ninios) }}</span><br/>
 					{{ form_widget(form.ninios) }}
 				</div>
 			</div>
-			
+
 			<div id="boton">
 				{{ form_widget(form.reservar) }}
 			</div>

@@ -39,9 +39,9 @@ class Cliente
 	/**
 	 * @var string
 	 * 
-	 * @ORM\Column(name="segundo_apellido", type="string", nullable=true)
+	 * @ORM\Column(name="dni", type="string", length=10, unique=true)
 	 */
-	private $segundoApellido;
+	private $dni;
 	
 	/**
 	 * @var string
@@ -81,7 +81,7 @@ class Cliente
 	/**
 	 * @var string
 	 * 
-	 * @ORM\Column(name="email", type="string", unique=true)
+	 * @ORM\Column(name="email", type="string")
 	 */
 	private $email;
 	
@@ -343,5 +343,28 @@ class Cliente
     public function getReservas()
     {
         return $this->reservas;
+    }
+
+    /**
+     * Set dni
+     *
+     * @param string $dni
+     * @return Cliente
+     */
+    public function setDni($dni)
+    {
+        $this->dni = $dni;
+
+        return $this;
+    }
+
+    /**
+     * Get dni
+     *
+     * @return string 
+     */
+    public function getDni()
+    {
+        return $this->dni;
     }
 }

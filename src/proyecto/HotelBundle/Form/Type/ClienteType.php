@@ -13,7 +13,7 @@ class ClienteType extends AbstractType
 		$builder
 			->add('nombre')
 			->add('primerApellido')
-			->add('segundoApellido')
+			->add('dni', 'text', array('label' => 'D. N. I.'))
 			->add('direccion', 'text', array('label' => 'Dirección'))
 			->add('ciudad')
 			->add('provincia')

@@ -1,0 +1,6 @@
+#hotel_informacion {width: 563px;margin: 0px auto;margin-bottom: 50px;}
+
+#hotel_informacion #titulo {padding-bottom: 5px;/*padding-top: 30px;*/border-bottom: 1px dashed rgba(100,100,100,0.40);}
+#hotel_informacion #titulo  h1 {color: #444;font-size: 23px;margin-bottom: 20px;}
+
+#hotel_informacion p {color: #888;font-size: 13px;margin-top: 20px;line-height:15px;}

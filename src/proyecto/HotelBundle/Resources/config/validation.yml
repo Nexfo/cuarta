@@ -23,12 +23,12 @@ proyecto\HotelBundle\Entity\Cliente:
                 max: 50
                 minMessage: "El primer apellido debería ser algo más largo."
                 maxMessage: "Por favor, introduce tu primer apellido correcto."
-        segundoApellido:
+        dni:
+            - NotBlank:  { message: "Debes introducir tu D. N. I." }
             - Length:
-                min: 2
-                max: 50
-                minMessage: "El segundo apellido debería ser algo más largo."
-                maxMessage: "Por favor, introduce tu segundo apellido correcto."
+                min: 10
+                max: 10
+                exactMessage: "El D. N. I. debe ser \"00000000-X\"."
         direccion:
             - NotBlank:  { message: "La dirección no puede estar vacía." }
             - Length:

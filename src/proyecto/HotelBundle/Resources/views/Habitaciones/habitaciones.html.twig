@@ -47,7 +47,7 @@
 				{% for habitacion in habitaciones %}
 					<div id="habitacion">
 						<div id="imagen">
-							<img src="{{ asset('bundles/proyectohotel/imgs/' ~ habitacion.imagen) }}" />
+							<img src="{{ asset('bundles/proyectohotel/imgs/habitaciones/' ~ habitacion.imagen) }}" />
 						</div>
 						<div id="descripcion">
 							<h1>{{ habitacion.nombre }}</h1>
@@ -64,7 +64,7 @@
 					<ul class="rslides" id="slider4">
 						{% for habFoto in habitacionesFotos %}
 							<li>
-								<img src="{{ asset('bundles/proyectohotel/imgs/' ~ habFoto.imagen) }}" />
+								<img src="{{ asset('bundles/proyectohotel/imgs/habitaciones_slider/' ~ habFoto.imagen) }}" />
 								<p class="caption">{{ habFoto.nombre }}</p>
 							</li>
 						{% endfor %}

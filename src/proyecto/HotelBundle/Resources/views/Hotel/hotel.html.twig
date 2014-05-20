@@ -57,7 +57,16 @@
 {% endblock %}
 
 {% block contenido %}
-	contenido
+	<div id="hotel_informacion">
+		<div id="titulo">
+			<h1>Hotel Symfony II</h1>
+		</div>
+		
+		<p>Un elegante santuario, el Hotel Symfony II dispone de dos restaurantes gourmet, una impresionante piscina rodeada de cabañas privadas , un centro de belleza y una fabulosa colección de arte contemporáneo.</p>
+		<p>Con una atractiva fachada, el Hotel Symfony II se encuentra rodeado de cuidados jardines con un patio encantador.</p>
+		<p>La selección de actividades en toda la zona va desde el ciclismo, equitación, escalada, barranquismo y senderismo para explorar la reserva natural a sólo diez minutos a pie del Hotel Symfony II. A sólo 30 minutos en coche, los amantes del golf encontrarán al menos cuatro magníficos campos de golf.</p>
+		<p>En línea con nuestro compromiso de ofrecer a nuestros clientes tanto en la elección y la diversidad, se ofrecen una amplia variedad de <a href="{{ path("pagina_habitaciones") }}">habitaciones</a> para que usted pueda elegir.</p>
+	</div>
 {% endblock %}
 
 {% block javascripts %}

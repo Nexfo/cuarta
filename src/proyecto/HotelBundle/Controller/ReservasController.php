@@ -137,12 +137,19 @@ class ReservasController extends Controller
 			$errorBool = false;
 		}
 		
+		if ($form->isValid()) {
+			if (!self::validarDni($aCliente['dni'])) {
+				$error = 'El D. N. I. debe ser "00000000-X".';
+				$errorBool = false;
+			}
+		}
+		
 		if ($form->isValid() && $errorBool) {
 			$query = $objDoctrine->createQuery(
 				'SELECT c
 				 FROM proyectoHotelBundle:Cliente c
-				 WHERE c.email = :email'
-			)->setParameter('email', $cliente->getEmail());
+				 WHERE c.dni = :dni'
+			)->setParameter('dni', $cliente->getDni());
 			$rCliente = $query->getOneOrNullResult();
 			
 			$objDoctrine->persist($reserva->setFechaPreReserva(new \DateTime("now")));
@@ -150,9 +157,16 @@ class ReservasController extends Controller
 			if (is_null($rCliente)) {
 				$objDoctrine->persist($cliente);
 			} else {
-				if (is_null($rCliente->getSegundoApellido()) && ($cliente->getSegundoApellido() != "")) {
-					$rCliente->setSegundoApellido($cliente->getSegundoApellido());
-				}
+				$rCliente->setNombre($cliente->getNombre());
+				$rCliente->setPrimerApellido($cliente->getPrimerApellido());
+				$rCliente->setDni($cliente->getDni());
+				$rCliente->setDireccion($cliente->getDireccion());
+				$rCliente->setCiudad($cliente->getCiudad());
+				$rCliente->setProvincia($cliente->getProvincia());
+				$rCliente->setCodPostal($cliente->getCodPostal());
+				$rCliente->setTelefono($cliente->getTelefono());
+				$rCliente->setEmail($cliente->getEmail());
+				
 				$cliente = $rCliente;
 			}
 			
@@ -193,12 +207,13 @@ class ReservasController extends Controller
 			->setBody(
 				$this->renderView(
 					'proyectoHotelBundle:Reservas:email.html.twig',
-					array(
-					'codigo' => $uniCod,
-					'nombre' => $reserva->getCliente()->getNombre())
-				)
-			)
-		;
+					array('codigo' => $uniCod,
+					'nombre' => $reserva->getCliente()->getNombre(),
+					'dni' => $reserva->getCliente()->getDni(),
+					'precio' => self::calcularImporte($reserva),
+					'email' => $reserva->getCliente()->getEmail()
+				))
+		);
 		$this->get('mailer')->send($email);
 		
 		$sesion->remove("id_reserva");
@@ -230,12 +245,67 @@ class ReservasController extends Controller
 			$reserva->setConfirmada(1);
 			$objDoctrine->flush();
 			$mensaje = "Reserva confirmada correctamente.";
+			self::enviarEmailFinal($reserva);
 		}
 		
 		return $this->render('proyectoHotelBundle:Reservas:confirmar.html.twig',
 			array('mensaje' => $mensaje,
 			'error' => $error
 		));
+	}
+	
+	private function calcularImporte($reserva) {
+		$importe = 0;
+		
+		$diferencia = $reserva->getFechaEntrada()->diff($reserva->getFechaSalida());
+		$numDias = $diferencia->format('%a');
+		
+		$habitaciones = $reserva->getHabitaciones();
+		foreach ($habitaciones as $habitacion) {
+			$importe += $habitacion->getPrecio() * intval($numDias);
+		}
+		
+		return $importe;
+	}
+	
+	private function enviarEmailFinal($reserva) {
+		$diferencia = $reserva->getFechaEntrada()->diff($reserva->getFechaSalida());
+		$numDias = $diferencia->format('%a');
+	
+		$email = \Swift_Message::newInstance()
+			->setContentType("text/html")
+			->setSubject('Tu reserva ha sido realizada y confirmada con éxito.')
+			->setFrom('symfony2hotel@gmail.com')
+			->setTo($reserva->getCliente()->getEmail())
+			->setBody(
+				$this->renderView(
+					'proyectoHotelBundle:Reservas:emailFinal.html.twig',
+					array('nombre' => $reserva->getCliente()->getNombre(),
+					'dni' => $reserva->getCliente()->getDni(),
+					'habitaciones' => $reserva->getHabitaciones(),
+					'numDias' => intval($numDias),
+					'total' => self::calcularImporte($reserva),
+			)));
+		$this->get('mailer')->send($email);
+	}
+	
+	private function validarDni($nif) {
+		if (!is_null($nif)) {
+			$partes = explode('-', $nif);
+			if (count($partes) > 1) {
+				$numeros = $partes[0];
+				$letra = strtoupper($partes[1]);
+				if (substr("TRWAGMYFPDXBNJZSQVHLCKE", $numeros%23, 1) == $letra) {
+				   return true;
+				} else {
+				   return false;
+				}
+			} else {
+				return false;
+			}
+		} else {
+			return true;
+		}
 	}
 	
 	private function cargarReserva($sesion) {

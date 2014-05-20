@@ -1,4 +1,10 @@
-Hola {{ nombre }}, gracias por realizar tu reserva.<br /><br />
+Hola {{ nombre }}, gracias por realizar tu reserva.<br />
+Tu reserva está asociada al número de D. N. I. {{ dni }}.<br />
+El importe de su reserva asciende a {{ precio }} €, que deberá de abonar en la recepción del hotel.<br />
+Una vez confirme la reserva se le enviará la factura desglosada a esta misma dirección de email ({{ email }}).<br />
+Ahora debes confirmarla en menos de 15 minutos, de lo contrario será eliminada.
+
+<br /><br />
 
 Para confirmar tu reserva debes acceder al siguiente enlace:<br />
 - <a href="{{ url('pagina_reservas_confirmar', {'codigo': codigo}) }}">Confirmar reserva</a>.

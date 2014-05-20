@@ -42,7 +42,7 @@
 			<div id="errores">
 				{{ form_errors(form.nombre) }}
 				{{ form_errors(form.primerApellido) }}
-				{{ form_errors(form.segundoApellido) }}
+				{{ form_errors(form.dni) }}
 				{{ form_errors(form.direccion) }}
 				{{ form_errors(form.ciudad) }}
 				{{ form_errors(form.provincia) }}
@@ -64,8 +64,8 @@
 			</div>
 		
 			<div class="i">
-				<span>{{ form_label(form.segundoApellido) }}</span><br/>
-				{{ form_widget(form.segundoApellido) }}
+				<span>{{ form_label(form.dni) }}</span><br/>
+				{{ form_widget(form.dni) }}
 			</div>
 				
 			<div class="d">

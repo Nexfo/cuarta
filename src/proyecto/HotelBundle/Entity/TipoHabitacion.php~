@@ -171,4 +171,27 @@ class TipoHabitacion
     {
         return $this->slug;
     }
+
+    /**
+     * Set nombrePlural
+     *
+     * @param string $nombrePlural
+     * @return TipoHabitacion
+     */
+    public function setNombrePlural($nombrePlural)
+    {
+        $this->nombrePlural = $nombrePlural;
+
+        return $this;
+    }
+
+    /**
+     * Get nombrePlural
+     *
+     * @return string 
+     */
+    public function getNombrePlural()
+    {
+        return $this->nombrePlural;
+    }
 }

@@ -1,0 +1,25 @@
+Hola {{ nombre }}, tu reserva se ha confirmado correctamente.<br/>
+Tu reserva está asociada con el número de D. N. I. {{ dni }}.
+
+<br /><br />
+
+<style>
+	th, td, tr {text-align: center;padding: 5px;}
+	.total td {border-top: 2px solid black; font-weight: bold;}
+</style>
+
+<div style="margin: 0 auto; width: 500px;">
+	<table>
+		<tr><th>Habitación</th><th>Num. días</th><th>Precio / Día</th><th>Sub. total</th></tr>
+		{% for habitacion in habitaciones %}
+			<tr><td>{{ habitacion.nombre }}</td><td>{{ numDias }}</td><td>{{ habitacion.precio }} €</td><td>{{ habitacion.precio*numDias }} €</td></tr>
+		{% endfor %}
+		<tr class="total"><td colspan="3">Total</td><td>{{ total }} €</td>
+	</table>
+</div>
+
+<br /><br />
+
+Esperamos que disfrutes de tu estancia,<br />
+recibe un cordial saludo,<br />
+Hotel Symfony II.

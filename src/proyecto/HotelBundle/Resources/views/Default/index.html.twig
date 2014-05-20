@@ -41,6 +41,23 @@
 	{{ form_end(form) }}
 {% endblock %}
 
+{% block contenido %}
+	<ul>
+		{% for habitacion in habitaciones %}
+			<li>
+				<img src="{{ asset('bundles/proyectohotel/imgs/habitaciones_index/' ~ habitacion.imagen) }}" />
+				<h4>{{ habitacion.nombre }} <span>{{ habitacion.precio }} €</span></h4>
+				<p>
+					{% for carac in habitacion.caracteristicas %}
+						{{ carac.nombre }}
+						{% if not loop.last %}, {% endif %}
+					{% endfor %}
+				</p>
+			</li>
+		{% endfor %}
+	</ul>
+{% endblock %}
+
 {% block javascripts %}
 	{{ parent() }}
 	<script src="{{ asset('bundles/proyectohotel/js/barra_reservas_index.js') }}"></script>

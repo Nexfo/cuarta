@@ -4,18 +4,18 @@ insert into tipohabitacion (id, nombre, nombrePlural, numPlazas, slug) values (3
 
 /* ============================================================================================================ */
 
-insert into habitacion (id, nombre, imagen, precio, tipo_id) values (1, 'Habitación primera', 'h_primera.jpg', 100, 1);
-insert into habitacion (id, nombre, imagen, precio, tipo_id) values (2, 'Habitación segunda', 'h_segunda.jpg', 110, 1);
-insert into habitacion (id, nombre, imagen, precio, tipo_id) values (3, 'Habitación tercera', 'h_tercera.jpg', 120, 1);
+insert into habitacion (id, nombre, imagen, precio, tipo_id) values (1, 'Habitación individual deluxe', 'h_primera.jpg', 100, 1);
+insert into habitacion (id, nombre, imagen, precio, tipo_id) values (2, 'Nature storm', 'h_segunda.jpg', 110, 1);
+insert into habitacion (id, nombre, imagen, precio, tipo_id) values (3, 'Rústica', 'h_tercera.jpg', 120, 1);
 
-insert into habitacion (id, nombre, imagen, precio, tipo_id) values (4, 'Habitación doble primera', 'h_d_primera.jpg', 150, 2);
-insert into habitacion (id, nombre, imagen, precio, tipo_id) values (5, 'Habitación doble segunda', 'h_d_segunda.jpg', 155, 2);
-insert into habitacion (id, nombre, imagen, precio, tipo_id) values (6, 'Habitación doble tercera', 'h_d_tercera.jpg', 160, 2);
-insert into habitacion (id, nombre, imagen, precio, tipo_id) values (7, 'Habitación doble cuarta', 'h_d_cuarta.jpg', 165, 2);
-insert into habitacion (id, nombre, imagen, precio, tipo_id) values (8, 'Habitación doble quinta', 'h_d_quinta.jpg', 170, 2);
+insert into habitacion (id, nombre, imagen, precio, tipo_id) values (4, 'Habitación doble deluxe', 'h_d_primera.jpg', 150, 2);
+insert into habitacion (id, nombre, imagen, precio, tipo_id) values (5, 'Landscape sunrise', 'h_d_segunda.jpg', 155, 2);
+insert into habitacion (id, nombre, imagen, precio, tipo_id) values (6, 'Dream paradise', 'h_d_tercera.jpg', 160, 2);
+insert into habitacion (id, nombre, imagen, precio, tipo_id) values (7, 'Despertar turquesa', 'h_d_cuarta.jpg', 165, 2);
+insert into habitacion (id, nombre, imagen, precio, tipo_id) values (8, 'Relaxnig coffe', 'h_d_quinta.jpg', 170, 2);
 
-insert into habitacion (id, nombre, imagen, precio, tipo_id) values (9, 'Habitación suite junior', 'suite_junior.jpg', 250, 3);
-insert into habitacion (id, nombre, imagen, precio, tipo_id) values (10, 'Habitación suite nupcial', 'suite_nupcial.jpg', 300, 3);
+insert into habitacion (id, nombre, imagen, precio, tipo_id) values (9, 'Suite deluxe', 'suite_junior.jpg', 250, 3);
+insert into habitacion (id, nombre, imagen, precio, tipo_id) values (10, 'Suite nupcial', 'suite_nupcial.jpg', 300, 3);
 
 /* ============================================================================================================ */
 
